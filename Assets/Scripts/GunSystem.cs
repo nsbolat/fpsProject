@@ -27,9 +27,15 @@ public class GunSystem : MonoBehaviour
     public LayerMask whatIsEnemy, groundLayer;
 
     // Graphics
-    [Header("Muzzles")]
-    public GameObject muzzleFlash, bulletHoleGraphic, groundBulletHolePrefab, enemyBulletHolePrefab, defaultBulletHolePrefab;
-    public TextMeshProUGUI text;
+    [Header("Muzzles")] 
+    public GameObject muzzleFlash;
+    public GameObject bulletHoleGraphic;
+    public GameObject groundBulletHolePrefab;
+    public GameObject enemyBulletHolePrefab;
+    public GameObject defaultBulletHolePrefab;
+    
+    [Header("Ammo UI Text")] 
+    public TextMeshProUGUI ammoUI;
 
     [Header("Audios")]
     public AudioSource audioSource;
@@ -86,7 +92,7 @@ public class GunSystem : MonoBehaviour
         MyInput();
 
         // SetText
-        text.SetText(bulletsLeft + " / " + magazineSize);
+        ammoUI.SetText(bulletsLeft + " / " + magazineSize);
     }
 
     public void gunCamRecoilUpdate()
@@ -198,7 +204,8 @@ public class GunSystem : MonoBehaviour
         }
 
         // Graphics
-        GameObject muzzleFlashLocate = Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        GameObject muzzleFlashLocate = Instantiate(muzzleFlash, attackPoint.position, attackPoint.transform.rotation);
+        muzzleFlashLocate.transform.SetParent(attackPoint);  // Muzzle flash'ı silahın attackPoint'ine ekle
         Destroy(muzzleFlashLocate, 1f);
 
         bulletsLeft--;
@@ -239,8 +246,13 @@ public class GunSystem : MonoBehaviour
             bulletHolePrefab = defaultBulletHolePrefab;
         }
 
-        GameObject bulletholes = Instantiate(bulletHolePrefab, rayHit.point, Quaternion.FromToRotation(Vector3.forward, rayHit.normal));
-        Destroy(bulletholes, 2f);
+        // Instantiate bullet hole
+        GameObject bulletHole = Instantiate(bulletHolePrefab, rayHit.point, Quaternion.FromToRotation(Vector3.forward, rayHit.normal));
+
+        // Attach bullet hole to the hit object
+        bulletHole.transform.SetParent(rayHit.collider.transform);
+
+        Destroy(bulletHole, 2f);
     }
 
     private void ResetShot()
