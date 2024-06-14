@@ -173,21 +173,25 @@ public class GunSystem : MonoBehaviour
         float y = Random.Range(-spread, spread);
 
         // Calculate Direction with Spread
-        Vector3 direction = cam.transform.forward + new Vector3(x, y, 0);
+        Vector3 rayDirection = cam.transform.forward + new Vector3(x, y, 0);
 
         // RayCast
-        if (Physics.Raycast(cam.transform.position, direction, out rayHit, range))
+        if (Physics.Raycast(cam.transform.position, rayDirection, out rayHit, range))
         {
             if (rayHit.collider.CompareTag("Enemy"))
             {
-                Rigidbody enemyRigidbody = rayHit.collider.GetComponent<Rigidbody>();
-                if (enemyRigidbody != null)
-                {
-                    Vector3 recoilDirection = rayHit.point - cam.transform.position;
-                    recoilDirection.Normalize();
-                    enemyRigidbody.AddForce(recoilDirection * recoilForce, ForceMode.Impulse);
-                }
                 // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
+            }
+
+            var rb2d = rayHit.collider.GetComponent<Rigidbody>();
+            if (rb2d)
+            {
+                rb2d.AddForceAtPosition(rayDirection*20,rayHit.point,ForceMode.Impulse);
+            }
+            var enemyHitBox = rayHit.collider.GetComponent<enemyHitbox>();
+            if (enemyHitBox)
+            {
+                enemyHitBox.onRaycastHit(this, rayDirection);
             }
 
             createBulletHole();
