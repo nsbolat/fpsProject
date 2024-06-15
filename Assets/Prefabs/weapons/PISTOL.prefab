@@ -584,10 +584,10 @@ MonoBehaviour:
   attackPoint: {fileID: 5196202695786168742}
   whatIsEnemy:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   groundLayer:
     serializedVersion: 2
-    m_Bits: 695
+    m_Bits: 1719
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
   bulletHoleGraphic: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
