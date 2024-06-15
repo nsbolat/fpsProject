@@ -69,6 +69,8 @@ public class GunSystem : MonoBehaviour
     public float gunRotationSpeed;
     public float gunReturnSpeed;
 
+    public AnimationClip weaoponAnimation;
+
     private void OnEnable()
     {
         gunCamRecoilUpdate();
@@ -96,10 +98,12 @@ public class GunSystem : MonoBehaviour
         adsPosition = AdsPositionTransform.transform.localPosition;
         camRecoil = GameObject.Find("CameraRecoil").GetComponent<AdvancedCamRecoil>();
         cam = GameObject.FindWithTag("Player").GetComponentInChildren<Camera>();
+        crosshair = GameObject.Find("Crosshair").GetComponent<Image>();
         camFovDefault = 75;
         bulletsLeft = magazineSize;
         readyToShoot = true;
         audioSource = GetComponent<AudioSource>();
+        ammoUI = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
         if (audioSource == null)
         {
             audioSource = gameObject.AddComponent<AudioSource>();
@@ -108,8 +112,7 @@ public class GunSystem : MonoBehaviour
 
     private void Update()
     {
-        MyInput();
-        ADS();
+        
         // SetText
         ammoUI.SetText(bulletsLeft + " / " + magazineSize);
     }
@@ -123,7 +126,7 @@ public class GunSystem : MonoBehaviour
     }
 
     #region MY INPUT
-    private void MyInput()
+    public void MyInput()
     {
         if (allowButtonHold)
         {
@@ -169,7 +172,7 @@ public class GunSystem : MonoBehaviour
     #endregion
 
     #region - ADS -
-    private void ADS()
+    public void ADS()
     {
         if (isAiming && !reloading)
         {
@@ -200,8 +203,7 @@ public class GunSystem : MonoBehaviour
     }
 
     #endregion
-
-
+    
     #region - SHOOT - 
     private void Shoot()
     {

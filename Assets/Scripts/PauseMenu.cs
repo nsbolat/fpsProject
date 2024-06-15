@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {        
         pauseMenuPanel.SetActive(true);
-        Time.timeScale = 0f;
+        Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         gameisPaused = true;

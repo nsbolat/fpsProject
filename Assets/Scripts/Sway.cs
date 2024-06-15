@@ -62,6 +62,7 @@ public class Sway : MonoBehaviour
 
     private void Start()
     {
+        playerCotroller = GameObject.FindGameObjectWithTag("Player").GetComponent<fps_CharacterController>();
         originalPosition = transform.localPosition;
         originalRotation = transform.localRotation;
     }
