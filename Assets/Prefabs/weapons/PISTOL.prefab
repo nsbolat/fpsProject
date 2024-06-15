@@ -587,7 +587,7 @@ MonoBehaviour:
     m_Bits: 256
   groundLayer:
     serializedVersion: 2
-    m_Bits: 759
+    m_Bits: 695
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
   bulletHoleGraphic: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
@@ -598,13 +598,11 @@ MonoBehaviour:
     type: 3}
   defaultBulletHolePrefab: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
-  text: {fileID: 0}
+  ammoUI: {fileID: 0}
   audioSource: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 9e9480b4d07646942b555fd43f2a0f71, type: 3}
   noAmmoSound: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}
   reloadSound: {fileID: 8300000, guid: 778c7be53403f9e45804f5a61a13a3e6, type: 3}
-  minPitch: 0.9
-  maxPitch: 1
   camRecoil: {fileID: 0}
   weaponRecoil: {fileID: 4398508926737960479}
   weaponModel: {fileID: 5450288776128437306}

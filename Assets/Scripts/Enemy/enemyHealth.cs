@@ -6,10 +6,10 @@ using UnityEngine;
 public class enemyHealth : MonoBehaviour
 {
     public float maxHealth;
-    public float dieForce;
     [HideInInspector]
     public float currentHealth;
-    Ragdoll ragdoll;
+
+    private AiAgent agent;
 
     private enemyUIHealthBar _healthBar;
 
@@ -25,7 +25,7 @@ public class enemyHealth : MonoBehaviour
 
     private void Start()
     {
-        ragdoll = GetComponent<Ragdoll>();
+        agent = GetComponent<AiAgent>();
         currentHealth = maxHealth;
         
         var _rigidBodies = GetComponentsInChildren<Rigidbody>();//tüm children rigidbodyleri çağır
@@ -65,10 +65,9 @@ public class enemyHealth : MonoBehaviour
 
     void Die( Vector3 direction)
     {
-        ragdoll.ActiveRagdoll();
-        direction.y = 1f;
-        ragdoll.ApplyForce(direction*dieForce);
-        _healthBar.gameObject.SetActive(false);
+     AiDeathState deathState = agent.stateMachine.GetState(AiStateId.Death) as AiDeathState;
+     deathState.direction = direction;
+     agent.stateMachine.ChangeState(AiStateId.Death);
     }
 
     private void Update()
