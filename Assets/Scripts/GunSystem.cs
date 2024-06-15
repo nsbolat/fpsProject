@@ -122,6 +122,7 @@ public class GunSystem : MonoBehaviour
         camRecoil.returnSpeed = gunReturnSpeed;
     }
 
+    #region MY INPUT
     private void MyInput()
     {
         if (allowButtonHold)
@@ -164,6 +165,8 @@ public class GunSystem : MonoBehaviour
             }
         }
     }
+    
+    #endregion
 
     #region - ADS -
     private void ADS()
@@ -199,6 +202,7 @@ public class GunSystem : MonoBehaviour
     #endregion
 
 
+    #region - SHOOT - 
     private void Shoot()
     {
         readyToShoot = false;
@@ -247,7 +251,9 @@ public class GunSystem : MonoBehaviour
             Invoke("Shoot", timeBetweenShots);
         }
     }
+    #endregion
 
+    #region - SOUND -
     private void playShootSound()
     {
         if (shootSound != null && audioSource != null)
@@ -255,6 +261,9 @@ public class GunSystem : MonoBehaviour
             audioSource.PlayOneShot(shootSound);
         }
     }
+    #endregion
+
+    #region BULLET HOLE
 
     private void createBulletHole()
     {
@@ -284,6 +293,8 @@ public class GunSystem : MonoBehaviour
         Destroy(bulletHole, 2f);
     }
 
+
+    #endregion
     private void ResetShot()
     {
         readyToShoot = true;
