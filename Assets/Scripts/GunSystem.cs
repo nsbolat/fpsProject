@@ -8,7 +8,9 @@ using static fps_Models;
 
 public class GunSystem : MonoBehaviour
 {
+    public DefaultInput gunDefaultInput;
     public PlayerSettingsModel playerSettings;
+    public PlayerStance _playerStance;
 
     [Header("Gun Stats")]
     public int damage;
@@ -58,6 +60,7 @@ public class GunSystem : MonoBehaviour
     public Image crosshair;
     public float camFovAds, camFovDefault;
     public bool isAds;
+    public bool isAiming;
 
     // Animator fpsAnim;
     [Header("Camera Recoil Settings")]
@@ -69,10 +72,26 @@ public class GunSystem : MonoBehaviour
     private void OnEnable()
     {
         gunCamRecoilUpdate();
+        gunDefaultInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        gunDefaultInput.Disable();
+        isAiming = false;
     }
 
     private void Awake()
     {
+        gunDefaultInput = new DefaultInput();
+
+        #region - ADS Key -
+
+        gunDefaultInput.Weapon.ADSPressed.performed += e => ADSInPressed();
+        gunDefaultInput.Weapon.ADSReleased.performed += e => ADSInReleased();
+
+        #endregion
+
         hipfirePosition = weaponModel.transform.localPosition;
         adsPosition = AdsPositionTransform.transform.localPosition;
         camRecoil = GameObject.Find("CameraRecoil").GetComponent<AdvancedCamRecoil>();
@@ -90,7 +109,7 @@ public class GunSystem : MonoBehaviour
     private void Update()
     {
         MyInput();
-
+        ADS();
         // SetText
         ammoUI.SetText(bulletsLeft + " / " + magazineSize);
     }
@@ -107,14 +126,14 @@ public class GunSystem : MonoBehaviour
     {
         if (allowButtonHold)
         {
-            shooting = Input.GetKey(KeyCode.Mouse0);
+            shooting = gunDefaultInput.Weapon.Fire.ReadValue<float>() > timeBetweenShooting;
         }
         else
         {
-            shooting = Input.GetKeyDown(KeyCode.Mouse0);
+            shooting = gunDefaultInput.Weapon.Fire.triggered;
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && !reloading)
+        if (gunDefaultInput.Weapon.Reload.triggered && bulletsLeft < magazineSize && !reloading)
         {
             Reload();
         }
@@ -144,13 +163,12 @@ public class GunSystem : MonoBehaviour
                 Invoke("ResetNoAmmoCooldown", 0.25f);
             }
         }
-
-        ADS();
     }
 
+    #region - ADS -
     private void ADS()
     {
-        if (Input.GetButton("Fire2") && !reloading)
+        if (isAiming && !reloading)
         {
             isAds = true;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, adsPosition, Time.deltaTime * adsSpeed);
@@ -169,6 +187,17 @@ public class GunSystem : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, camFovDefault, Time.deltaTime * adsSpeed);
         }
     }
+
+    private void ADSInPressed()
+    {
+        isAiming = true;
+    } private void ADSInReleased()
+    {
+        isAiming = false;
+    }
+
+    #endregion
+
 
     private void Shoot()
     {

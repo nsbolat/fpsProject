@@ -19,7 +19,6 @@ public class AILocomotif : MonoBehaviour
     private Animator animator;
     void Start()
     {
-        
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }

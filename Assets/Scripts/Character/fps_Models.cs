@@ -14,7 +14,7 @@ public static class fps_Models
     [Serializable] 
     public class PlayerSettingsModel
     {
-        [Header("View Settings")]
+        [Header("View Sens Settings")]
         public float ViewXsens;
         public float ViewYsens;
         public float CameraFov;

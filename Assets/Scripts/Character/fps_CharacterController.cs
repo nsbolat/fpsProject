@@ -12,6 +12,9 @@ public class fps_CharacterController : MonoBehaviour
     private DefaultInput defaultInput;
     public Vector2 input_Movement; //denetleyiciden gelen ham girdi
     public Vector2 input_View; //denetleyiciden gelen ham girdi
+    public float currentViewXsens;
+    public float currentViewYsens;
+
 
     public Vector2 newCameraRotasyon;
     private Vector3 newCharacterRotasyon;
@@ -58,9 +61,6 @@ public class fps_CharacterController : MonoBehaviour
     private bool isSprint;
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
-    
-    //gunsystem
-    public GunSystem _GunSystem;
 
     //[Header("Anim")] 
    // public Animator fpsAnim;
@@ -91,6 +91,9 @@ public class fps_CharacterController : MonoBehaviour
         
         cameraHeight = cameraHolder.localPosition.y;
         cam.fieldOfView = playerSettings.CameraFov;
+
+        currentViewYsens = playerSettings.ViewYsens;
+        currentViewXsens = playerSettings.ViewXsens;
     }
 
     private void Update()
@@ -108,10 +111,10 @@ public class fps_CharacterController : MonoBehaviour
     
     private void calculateView()
     {
-        newCharacterRotasyon.y += playerSettings.ViewXsens * (playerSettings.ViewXinverted ? -input_View.x: input_View.x ) * Time.deltaTime;
+        newCharacterRotasyon.y += currentViewXsens * (playerSettings.ViewXinverted ? -input_View.x: input_View.x ) * Time.deltaTime;
         transform.localRotation = Quaternion.Euler(newCharacterRotasyon);
         
-        newCameraRotasyon.x += playerSettings.ViewYsens * (playerSettings.ViewYinverted ? input_View.y: -input_View.y ) * Time.deltaTime;
+        newCameraRotasyon.x += currentViewYsens * (playerSettings.ViewYinverted ? input_View.y: -input_View.y ) * Time.deltaTime;
         newCameraRotasyon.x = Mathf.Clamp(newCameraRotasyon.x, ViewClampYmin, ViewClampYmax); // X rotasyonu limitleme
         
         cameraHolder.localRotation = Quaternion.Euler(newCameraRotasyon);
@@ -119,11 +122,7 @@ public class fps_CharacterController : MonoBehaviour
 
     private void calculateMovement()
     {
-        //koşma
-        if (input_Movement.y <= 0.2f)
-        {
-            isSprint = false;
-        }
+
         
         //Movement atama
         var verticalSpeed = playerSettings.walkFowardSpeed;
@@ -133,6 +132,12 @@ public class fps_CharacterController : MonoBehaviour
         {
             verticalSpeed = playerSettings.runFowardSpeed;
             horizontalSpeed = playerSettings.runStrafeSpeed;
+        }
+        
+        //koşma
+        if (input_Movement.magnitude <= 0.2f && !playerSettings.sprintHold)
+        {
+            isSprint = false;
         }
         
         // Effectors
@@ -145,9 +150,6 @@ public class fps_CharacterController : MonoBehaviour
         }else if (_playerStance == PlayerStance.Prone)
         {
             playerSettings.speedEffector = playerSettings.proneSpeedEffector;
-        }else if (_GunSystem.isAds)
-        {
-            playerSettings.speedEffector = playerSettings.crouchSpeedEffector;
         }
         else
         {
@@ -281,7 +283,7 @@ public class fps_CharacterController : MonoBehaviour
     }
     private void ToggleSprint()
     {
-        if (input_Movement.y <= 0.2f)
+        if (input_Movement.magnitude <= 0.2f && !playerSettings.sprintHold)
         {
             isSprint = false;
             return;
