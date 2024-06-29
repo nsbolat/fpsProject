@@ -290,6 +290,8 @@ MonoBehaviour:
   promptMessage: PICK UP "M4A4"
   weaponFab: {fileID: 5190462479071628253, guid: 1cae8fa68681c7d4ab7a9b2e5174b47c,
     type: 3}
+  weaponFabAi: {fileID: 5190462479071628253, guid: ac06c7691e8a38340a8238834c22e6ba,
+    type: 3}
 --- !u!54 &7989265571146224288
 Rigidbody:
   m_ObjectHideFlags: 0

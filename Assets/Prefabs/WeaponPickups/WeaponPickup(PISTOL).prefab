@@ -207,6 +207,8 @@ MonoBehaviour:
   promptMessage: PICK UP "PISTOL"
   weaponFab: {fileID: 7818680775838084041, guid: c00eb6149a3cb3340b8ad98d3ad9d3fb,
     type: 3}
+  weaponFabAi: {fileID: 7818680775838084041, guid: 02c1307a7d1278343b79cc00e5c39237,
+    type: 3}
 --- !u!54 &7989265571146224288
 Rigidbody:
   m_ObjectHideFlags: 0

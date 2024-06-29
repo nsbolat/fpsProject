@@ -18,8 +18,11 @@ public class AiDeathState : AiState
         agent.ragdoll.ApplyForce(direction*agent.config.dieForce);
         agent.ui.gameObject.SetActive(false);
         agent.mesh.updateWhenOffscreen = true;
-        
-        
+        agent.navMeshAgent.stoppingDistance = 0f;
+        agent.navMeshAgent.destination = agent.transform.position;
+        agent.navMeshAgent.speed = 0f;
+
+
     }
 
     public void Update(AiAgent agent)

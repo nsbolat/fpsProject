@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
@@ -18,9 +19,10 @@ public class GunSystem : MonoBehaviour
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
+    public Transform gunFirePoint;
 
     // bools 
-    bool shooting, readyToShoot, reloading, noAmmoCooldown;
+    public bool shooting, readyToShoot, reloading, noAmmoCooldown;
 
     [Header("References")]
     public Camera cam;
@@ -99,6 +101,9 @@ public class GunSystem : MonoBehaviour
         camRecoil = GameObject.Find("CameraRecoil").GetComponent<AdvancedCamRecoil>();
         cam = GameObject.FindWithTag("Player").GetComponentInChildren<Camera>();
         crosshair = GameObject.Find("Crosshair").GetComponent<Image>();
+        
+        gunFirePoint = GameObject.Find("Raycast").GetComponentInChildren<Transform>();
+        
         camFovDefault = 75;
         bulletsLeft = magazineSize;
         readyToShoot = true;
@@ -146,7 +151,7 @@ public class GunSystem : MonoBehaviour
         if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
-            Shoot();
+            StartCoroutine(Shoot(cam.transform.forward, cam.transform.position));
             playShootSound();
             // ShakeCamera
             camRecoil.Fire();
@@ -158,7 +163,6 @@ public class GunSystem : MonoBehaviour
             if (!noAmmoCooldown)
             {
                 // Play no ammo sound
-                Debug.Log("No ammo");
                 if (noAmmoSound != null && audioSource != null)
                 {
                     audioSource.PlayOneShot(noAmmoSound);
@@ -204,8 +208,9 @@ public class GunSystem : MonoBehaviour
 
     #endregion
     
-    #region - SHOOT - 
-    private void Shoot()
+    #region - SHOOT -
+    
+    public IEnumerator Shoot(Vector3 target, Vector3 AttackPoint)
     {
         readyToShoot = false;
 
@@ -214,10 +219,9 @@ public class GunSystem : MonoBehaviour
         float y = Random.Range(-spread, spread);
 
         // Calculate Direction with Spread
-        Vector3 rayDirection = cam.transform.forward + new Vector3(x, y, 0);
 
-        // RayCast
-        if (Physics.Raycast(cam.transform.position, rayDirection, out rayHit, range))
+        // RayCastif (Physics.Raycast(cam.transform.position, target, out rayHit, range))
+        if (Physics.Raycast(AttackPoint, target + new Vector3(x,y,0), out rayHit, range))
         {
             if (rayHit.collider.CompareTag("Enemy"))
             {
@@ -227,12 +231,12 @@ public class GunSystem : MonoBehaviour
             var rb2d = rayHit.collider.GetComponent<Rigidbody>();
             if (rb2d)
             {
-                rb2d.AddForceAtPosition(rayDirection*20,rayHit.point,ForceMode.Impulse);
+                rb2d.AddForceAtPosition(target*20,rayHit.point,ForceMode.Impulse);
             }
             var enemyHitBox = rayHit.collider.GetComponent<enemyHitbox>();
             if (enemyHitBox)
             {
-                enemyHitBox.onRaycastHit(this, rayDirection);
+                enemyHitBox.onRaycastHit(this, target);
             }
 
             createBulletHole();
@@ -245,18 +249,21 @@ public class GunSystem : MonoBehaviour
 
         bulletsLeft--;
         bulletsShot--;
-
-        Invoke("ResetShot", timeBetweenShooting);
-
+        
         if (bulletsShot > 0 && bulletsLeft > 0)
         {
-            Invoke("Shoot", timeBetweenShots);
+            StartCoroutine(Shoot(target, AttackPoint));
+            readyToShoot = false;
         }
+        
+        yield return new WaitForSeconds(timeBetweenShooting);
+        readyToShoot = true;
+        
     }
     #endregion
 
     #region - SOUND -
-    private void playShootSound()
+    public void playShootSound()
     {
         if (shootSound != null && audioSource != null)
         {
