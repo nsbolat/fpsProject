@@ -40,6 +40,8 @@ public class GunSystem : MonoBehaviour
     
     [Header("Ammo UI Text")] 
     public TextMeshProUGUI ammoUI;
+    public Sprite icon;
+    public string label;
 
     [Header("Audios")]
     public AudioSource audioSource;
@@ -304,7 +306,7 @@ public class GunSystem : MonoBehaviour
 
 
     #endregion
-    private void ResetShot()
+    public void ResetShot()
     {
         readyToShoot = true;
     }

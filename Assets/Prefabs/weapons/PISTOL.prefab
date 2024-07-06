@@ -607,6 +607,8 @@ MonoBehaviour:
   defaultBulletHolePrefab: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980,
     type: 3}
   ammoUI: {fileID: 0}
+  icon: {fileID: 21300000, guid: 942a19b55dd9f6e4f9a5078749e7f04b, type: 3}
+  label: Pistol
   audioSource: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 9e9480b4d07646942b555fd43f2a0f71, type: 3}
   noAmmoSound: {fileID: 8300000, guid: 0c187ee2790c74c4e9985aa1ee1a12d5, type: 3}

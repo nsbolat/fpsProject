@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponPickup : Interactable
 {
     private ActiveWeapon _activeWeapon;
+
     public GunSystem weaponFab;
 
     private void Awake()
@@ -21,7 +24,6 @@ public class WeaponPickup : Interactable
             GunSystem newWeapon = Instantiate(weaponFab);
             activeWeapon.Equip(newWeapon);
         }
-        InventorySystem.
         Destroy(this.gameObject);
     }
 }
