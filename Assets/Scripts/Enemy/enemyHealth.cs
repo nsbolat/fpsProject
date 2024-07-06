@@ -51,10 +51,12 @@ public class enemyHealth : MonoBehaviour
     {
         currentHealth -= amount; // gelen hasarı mevcut candan çıkar
         _healthBar.setHealthBarPercentage(currentHealth/maxHealth);
+        
+        agent.stateMachine.ChangeState(AiStateId.Damage);
 
         blinkTimer = blinkDuration;
         isBlinking = true;
-
+        
         if (currentHealth <= 0.0f) // canı 0 sa öldür
         {
             Die(direction);

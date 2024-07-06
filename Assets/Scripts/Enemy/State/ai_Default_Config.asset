@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b01f2631834b324a84dbe3f804d4241, type: 3}
   m_Name: ai_Default_Config
   m_EditorClassIdentifier: 
-  maxTime: 0.2
+  maxTime: 0.1
   maxDistance: 1
   dieForce: 5
   maxSightDistance: 5
+  attackRange: 2

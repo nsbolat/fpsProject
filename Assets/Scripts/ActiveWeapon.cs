@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ActiveWeapon : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class ActiveWeapon : MonoBehaviour
     private List<GunSystem> weapons = new List<GunSystem>();
     public GameObject itemSlotPrefab;
     public Transform inventoryBarTransform;
+    public GameObject currentWeaponUI;
+    public Image cuWeapon; // Reference to your WeaponPanel GameObject
 
     public Transform slot1, slot2, slot3;
 
@@ -27,12 +30,17 @@ public class ActiveWeapon : MonoBehaviour
         {
             weapon.MyInput();
             weapon.ADS();
+            currentWeaponUI.GetComponent<CanvasGroup>().alpha = 1;
+        }
+        else
+        {
+            currentWeaponUI.GetComponent<CanvasGroup>().alpha = 0;
         }
         
         // Weapon switch input handling
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (currentWeaponIndex != 0) // Silah slot1'deyse tekrar slot1'e basmaması için kontrol
+            if (currentWeaponIndex != 0)
             {
                 SwitchWeapon(0);
             }
@@ -62,7 +70,6 @@ public class ActiveWeapon : MonoBehaviour
         // Check if all slots are full
         if (slot1.childCount > 0 && slot2.childCount > 0 && slot3.childCount > 0)
         {
-            Debug.Log("Envanter dolu!");
             return;
         }
 
@@ -88,7 +95,7 @@ public class ActiveWeapon : MonoBehaviour
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localRotation = Quaternion.identity;
         newWeapon.gameObject.SetActive(false); // Initially inactive
-        
+
         inventoryBarTransform.GetComponent<UI_Inventory>().ShowInventoryBar();
 
         // UI için ItemSlot prefabını oluşturun
@@ -104,13 +111,14 @@ public class ActiveWeapon : MonoBehaviour
             itemSlot.SetLabel(newWeapon.label); // label, silahın etiketini temsil eden bir değişken olmalı
             itemSlot.SetSlotIndex(slotIndex);
         }
+        
+        // Update WeaponPanel icon
 
         if (currentWeaponIndex == -1)
         {
             currentWeaponIndex = 0;
             weapon = newWeapon;
             weapon.gameObject.SetActive(true); // Activate the first weapon if it's the first one
-
             // Seçilen silahın bulunduğu slotun "Selected" objesini aktif hale getirin
             Transform selectedSlot = inventoryBarTransform.GetChild(currentWeaponIndex);
             if (selectedSlot != null)
@@ -119,11 +127,11 @@ public class ActiveWeapon : MonoBehaviour
                 if (selected != null)
                 {
                     selected.gameObject.SetActive(true);
+                    UpdateWeaponPanelIcon(newWeapon.icon);
                 }
             }
         }
     }
-
 
     public void SwitchWeapon(int slotIndex)
     {
@@ -132,20 +140,17 @@ public class ActiveWeapon : MonoBehaviour
         // Kontrolü ekle: Eğer mevcut silah reloading veya shooting ise işlemi engelle
         if (weapon && (weapon.reloading || weapon.shooting))
         {
-            Debug.Log("Silah yenileniyor veya ateş ediliyor. Silah değiştirme işlemi şu anda mümkün değil.");
             return;
         }
 
         // Kontrolü ekle: Eğer mevcut silah zaten seçili slot ise işlemi engelle
         if (currentWeaponIndex == slotIndex)
         {
-            Debug.Log("Silah zaten bu slotta. Silah değiştirme işlemi şu anda mümkün değil.");
             return;
         }
 
         if (slotIndex < 0 || slotIndex >= weapons.Count || weapons[slotIndex] == null)
         {
-            Debug.Log("Geçersiz slot indexi veya silah yok");
             return;
         }
 
@@ -184,8 +189,10 @@ public class ActiveWeapon : MonoBehaviour
                 selected.gameObject.SetActive(true);
             }
         }
+        
+        // Update WeaponPanel icon
+        UpdateWeaponPanelIcon(weapon.icon);
     }
-
 
     private void SwitchToNextWeapon()
     {
@@ -209,4 +216,9 @@ public class ActiveWeapon : MonoBehaviour
         SwitchWeapon(previousIndex);
     }
 
+    private void UpdateWeaponPanelIcon(Sprite icon)
+    {
+        Image weaponIconImage = cuWeapon;
+            weaponIconImage.sprite = icon;
+    }
 }

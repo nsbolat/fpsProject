@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class AiAgent : MonoBehaviour
 {
     public Transform playerTransform;
-    
     public AiStateMachine stateMachine;
     public AiStateId initialState;
     public NavMeshAgent navMeshAgent;
@@ -14,33 +13,56 @@ public class AiAgent : MonoBehaviour
     public Ragdoll ragdoll;
     public SkinnedMeshRenderer mesh;
     public enemyUIHealthBar ui;
+    public Animator animator;
     
-    
-    // Start is called before the first frame update
+    public delegate void AttackHitEvent(AiAgent agent);
+    public event AttackHitEvent OnAttackHit;
+
+    private bool isAnimationPlaying;
+
     void Start()
     {
         if (playerTransform == null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        
+
         ragdoll = GetComponent<Ragdoll>();
+        animator = GetComponent<Animator>();
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         ui = GetComponentInChildren<enemyUIHealthBar>();
-        
+
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AiStateMachine(this);
-        
+
         stateMachine.RegisterState(new AiIdleState());
         stateMachine.RegisterState(new AiChasePlayerState());
         stateMachine.RegisterState(new AiDeathState());
-        
+        stateMachine.RegisterState(new AiDamage());
+        stateMachine.RegisterState(new AiAttackState());
+
         stateMachine.ChangeState(initialState);
     }
 
-    // Update is called once per frame
     void Update()
     {
         stateMachine.Update();
+        CheckAnimationState();
+    }
+
+    private void CheckAnimationState()
+    {
+        isAnimationPlaying = animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack");
+        navMeshAgent.isStopped = isAnimationPlaying;
+    }
+    
+    private void AttackHit()
+    {
+        // Event tetiklenirse, abone olan tüm metodları çağır
+        if (OnAttackHit != null)
+        {
+            OnAttackHit(this);
+        }
     }
 }
+
