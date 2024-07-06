@@ -24,7 +24,6 @@ public class ActiveWeapon : MonoBehaviour
          weapon.MyInput();
          weapon.ADS();
       }
-      
    }
 
    public void Equip(GunSystem newWeapon)

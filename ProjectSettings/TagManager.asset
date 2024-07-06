@@ -10,6 +10,7 @@ TagManager:
   - Concrete
   - Metal
   - ExplosiveBarrel
+  - Inventory
   layers:
   - Default
   - TransparentFX

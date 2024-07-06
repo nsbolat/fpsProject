@@ -21,6 +21,7 @@ public class WeaponPickup : Interactable
             GunSystem newWeapon = Instantiate(weaponFab);
             activeWeapon.Equip(newWeapon);
         }
+        InventorySystem.
         Destroy(this.gameObject);
     }
 }
