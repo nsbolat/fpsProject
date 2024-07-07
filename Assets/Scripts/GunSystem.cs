@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
@@ -28,7 +29,8 @@ public class GunSystem : MonoBehaviour
     public Camera cam;
     public Transform attackPoint;
     public RaycastHit rayHit;
-    public LayerMask whatIsEnemy, groundLayer;
+    public Animator animator;
+    public LayerMask whatIsEnemy, groundLayer, playerLayer;
 
     // Graphics
     [Header("Muzzles")] 
@@ -103,7 +105,7 @@ public class GunSystem : MonoBehaviour
         camRecoil = GameObject.Find("CameraRecoil").GetComponent<AdvancedCamRecoil>();
         cam = GameObject.FindWithTag("Player").GetComponentInChildren<Camera>();
         crosshair = GameObject.Find("Crosshair").GetComponent<Image>();
-        
+        animator = GetComponent<Animator>();
         gunFirePoint = GameObject.Find("Raycast").GetComponentInChildren<Transform>();
         
         camFovDefault = 75;
@@ -229,7 +231,7 @@ public class GunSystem : MonoBehaviour
             {
                 // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
             }
-
+            
             var rb2d = rayHit.collider.GetComponent<Rigidbody>();
             if (rb2d)
             {
@@ -241,6 +243,10 @@ public class GunSystem : MonoBehaviour
                 enemyHitBox.onRaycastHit(this, target);
             }
 
+            if (rayHit.collider.CompareTag("Player"))
+            {
+                
+            }
             createBulletHole();
         }
 
@@ -289,7 +295,12 @@ public class GunSystem : MonoBehaviour
         else if ((groundLayer.value & (1 << hitLayer)) > 0)
         {
             bulletHolePrefab = groundBulletHolePrefab;
+        }else if ((playerLayer.value & (1 << hitLayer)) > 0)
+        {
+            bulletHolePrefab = null;
+            return;
         }
+        
         else
         {
             bulletHolePrefab = defaultBulletHolePrefab;
@@ -320,6 +331,7 @@ public class GunSystem : MonoBehaviour
     {
         reloading = true;
         audioSource.PlayOneShot(reloadSound);
+        animator.SetBool("isReload", true);
         Invoke("ReloadFinished", reloadTime);
     }
 
@@ -327,5 +339,7 @@ public class GunSystem : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         reloading = false;
+        animator.SetBool("isReload", false);
+
     }
 }

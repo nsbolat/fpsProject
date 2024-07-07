@@ -13,7 +13,7 @@ public class AiDamage : AiState
     public void Enter(AiAgent agent)
     {
         damageTimer = 0.5f;
-        agent.navMeshAgent.speed = 4f;
+        agent.navMeshAgent.speed = agent.config.defaultSpeed/2;
         agent.animator.SetLayerWeight(1, 1f); // Start with full weight
         agent.animator.SetTrigger("Damage");
     }
@@ -31,7 +31,7 @@ public class AiDamage : AiState
         if (damageTimer <= 0f)
         {
             agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
-            agent.navMeshAgent.speed = 6f;
+            agent.navMeshAgent.speed = agent.config.defaultSpeed;
         }
     }
 

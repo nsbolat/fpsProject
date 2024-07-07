@@ -667,6 +667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5676816281242713729}
   - component: {fileID: 2964334886021685628}
+  - component: {fileID: -4598002777666572134}
   m_Layer: 8
   m_Name: SHOTGUN
   m_TagString: Untagged
@@ -740,12 +741,16 @@ MonoBehaviour:
   noAmmoCooldown: 0
   cam: {fileID: 0}
   attackPoint: {fileID: 3932699183972682795}
+  animator: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   groundLayer:
     serializedVersion: 2
     m_Bits: 1719
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
   bulletHoleGraphic: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
@@ -781,6 +786,27 @@ MonoBehaviour:
   gunRotationSpeed: 6
   gunReturnSpeed: 35
   weaoponAnimation: {fileID: 0}
+--- !u!95 &-4598002777666572134
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8533967040913105549}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d6fbe9a2fdbe3bd42ba5cc5fdb6c2bfb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &9021787314028203548
 GameObject:
   m_ObjectHideFlags: 0

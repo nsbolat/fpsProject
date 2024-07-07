@@ -874,6 +874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8155114918411394796}
   - component: {fileID: 5190462479071628253}
+  - component: {fileID: 4080519060846218141}
   m_Layer: 8
   m_Name: RIFLE
   m_TagString: Untagged
@@ -947,12 +948,16 @@ MonoBehaviour:
   noAmmoCooldown: 0
   cam: {fileID: 0}
   attackPoint: {fileID: 7000108992377711992}
+  animator: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   groundLayer:
     serializedVersion: 2
     m_Bits: 1719
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
   bulletHoleGraphic: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
@@ -988,6 +993,27 @@ MonoBehaviour:
   gunRotationSpeed: 6
   gunReturnSpeed: 35
   weaoponAnimation: {fileID: 0}
+--- !u!95 &4080519060846218141
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8270734185473125288}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a6c498f077cc58241a54de9a55d82ad4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8290449358413401494
 GameObject:
   m_ObjectHideFlags: 0

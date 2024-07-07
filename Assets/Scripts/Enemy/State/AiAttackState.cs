@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AiAttackState : AiState
@@ -16,7 +15,7 @@ public class AiAttackState : AiState
     public void Enter(AiAgent agent)
     {
         lastAttackTime = Time.time - attackCooldown; // Saldırıyı hemen başlatmak için
-        agent.animator.SetLayerWeight(2, 1f); // 2. katmanı etkinleştir
+        agent.StartCoroutine(IncreaseLayerWeight(agent, 2, 1f, 0.5f)); // Start the coroutine to increase layer weight over 0.5 seconds
         Attack(agent);
         hasAttacked = false;
 
@@ -44,6 +43,13 @@ public class AiAttackState : AiState
             return;
         }
 
+        attackCooldown -= Time.deltaTime;
+        if (attackCooldown <=0)
+        {
+            agent.animator.SetInteger("AttackIndex", Random.Range(0, 4));
+            attackCooldown = 1f;
+        }
+        
         if (Time.time >= lastAttackTime + attackCooldown && !hasAttacked)
         {
             Attack(agent);
@@ -65,7 +71,7 @@ public class AiAttackState : AiState
     public void Exit(AiAgent agent)
     {
         agent.animator.SetBool("isAttacking", false);
-        agent.animator.SetLayerWeight(2, 0f); // 2. katmanı devre dışı bırak
+        agent.StartCoroutine(DecreaseLayerWeight(agent, 2, 0f, 0.5f)); // Start the coroutine to decrease layer weight over 0.5 seconds
         agent.navMeshAgent.isStopped = false; // Hareketi tekrar başlat
 
         // Animasyon eventi metod bağlantısını kaldır
@@ -76,7 +82,7 @@ public class AiAttackState : AiState
     {
         if (!agent.animator.GetCurrentAnimatorStateInfo(2).IsTag("Attack"))
         {
-            int attackAnimation = Random.Range(0, 2); // 0 veya 1 rastgele animasyon seçimi
+            agent.animator.SetInteger("AttackIndex", Random.Range(0, 4));
             agent.animator.SetBool("isAttacking", true);
         }
     }
@@ -86,5 +92,35 @@ public class AiAttackState : AiState
     {
         // Hasar verme işlemi
         agent.playerTransform.GetComponent<PlayerHealth>().TakePlayerDamage(5);
+    }
+
+    private IEnumerator IncreaseLayerWeight(AiAgent agent, int layerIndex, float targetWeight, float duration)
+    {
+        float startWeight = agent.animator.GetLayerWeight(layerIndex);
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            agent.animator.SetLayerWeight(layerIndex, Mathf.Lerp(startWeight, targetWeight, time / duration));
+            yield return null;
+        }
+
+        agent.animator.SetLayerWeight(layerIndex, targetWeight);
+    }
+
+    private IEnumerator DecreaseLayerWeight(AiAgent agent, int layerIndex, float targetWeight, float duration)
+    {
+        float startWeight = agent.animator.GetLayerWeight(layerIndex);
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            agent.animator.SetLayerWeight(layerIndex, Mathf.Lerp(startWeight, targetWeight, time / duration));
+            yield return null;
+        }
+
+        agent.animator.SetLayerWeight(layerIndex, targetWeight);
     }
 }

@@ -517,6 +517,7 @@ GameObject:
   - component: {fileID: 6551614371075773214}
   - component: {fileID: 7818680775838084041}
   - component: {fileID: 674069878964380943}
+  - component: {fileID: -5797260633322714253}
   m_Layer: 8
   m_Name: PISTOL
   m_TagString: Untagged
@@ -590,12 +591,16 @@ MonoBehaviour:
   noAmmoCooldown: 0
   cam: {fileID: 0}
   attackPoint: {fileID: 5196202695786168742}
+  animator: {fileID: 0}
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 512
   groundLayer:
     serializedVersion: 2
     m_Bits: 1719
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 256
   muzzleFlash: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 3}
   bulletHoleGraphic: {fileID: 1000012600307132, guid: 20c0f7e297297fc468f9740f6bb08cb1,
@@ -652,6 +657,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.05248159, y: 0.16536397, z: 0.25637788}
   m_Center: {x: 0.086955816, y: -0.15345213, z: 0.23987809}
+--- !u!95 &-5797260633322714253
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306162697568346678}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0fe7e95efe7065c41b577f4ac411dc70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1463687551485225644
 GameObject:
   m_ObjectHideFlags: 0
