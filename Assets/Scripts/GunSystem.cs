@@ -239,12 +239,14 @@ public class GunSystem : MonoBehaviour
 
         // Spread
         float x = Random.Range(-spreadCurrent, spreadCurrent);
-        float y = Random.Range(-spreadCurrent, spreadCurrent);
+        float y = Random.Range(-spreadCurrent, spreadCurrent); 
+        float z = Random.Range(-spreadCurrent, spreadCurrent);
+
 
         // Calculate Direction with Spread
 
         // RayCastif (Physics.Raycast(cam.transform.position, target, out rayHit, range))
-        if (Physics.Raycast(AttackPoint, target + new Vector3(x,y,0), out rayHit, range))
+        if (Physics.Raycast(AttackPoint, target + new Vector3(x,y,z), out rayHit, range))
         {
             if (rayHit.collider.CompareTag("Enemy"))
             {
