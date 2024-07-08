@@ -426,7 +426,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7153302825212793597}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -541,7 +541,7 @@ MonoBehaviour:
   RightHandTarget: {fileID: 2558888730351282573}
   LeftHandTarget: {fileID: 3201221894718277787}
   FPSCharacterController: {fileID: 0}
-  damage: 20
+  damage: 50
   timeBetweenShooting: 0.7
   spreadHipfire: 0.07
   spreadADS: 0.03
@@ -596,7 +596,7 @@ MonoBehaviour:
   sightTransform: {fileID: 2423118571051451211}
   adsPosition: {x: 0, y: 0, z: 0}
   adsRotation: {x: 0, y: 0, z: 0}
-  adsSpeed: 15
+  adsSpeed: 7
   crosshair: {fileID: 0}
   camFovAds: 50
   camFovDefault: 0
@@ -678,10 +678,14 @@ MonoBehaviour:
   maxStepDistance: 1
   stepADS: 1
   maxStepDistanceADS: 1
+  stepAir: 0.02
+  maxStepDistanceAir: 0.1
   rotationStep: 15
   maxRotationStep: 50
   rotationStepADS: 5
   maxRotationStepADS: 30
+  rotationStepAir: 6
+  maxRotationStepAir: 7.5
   smooth: 0
   bobbingSpeed: 7
   bobbingAmount: 1
@@ -691,8 +695,11 @@ MonoBehaviour:
   bobLimit: {x: 10, y: 10, z: 10}
   travelLimitADS: {x: 1, y: 1, z: 1}
   bobLimitADS: {x: 5, y: 5, z: 5}
+  travelLimitAir: {x: 0.05, y: 0.05, z: 0.05}
+  bobLimitAir: {x: 0.02, y: 0.02, z: 0.02}
   multiplier: {x: 1.5, y: 2, z: 2}
   multiplierADS: {x: 1, y: 1, z: 1}
+  multiplierAir: {x: 0, y: 0, z: 0}
   sprintMultiplier: {x: 4, y: 6, z: 2}
 --- !u!1 &8829988150584377372
 GameObject:
@@ -744,7 +751,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8829988150584377372}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -827,7 +834,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8881297467998659572}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

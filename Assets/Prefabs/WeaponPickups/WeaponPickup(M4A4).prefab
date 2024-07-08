@@ -288,9 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 0
   promptMessage: PICK UP "M4A4"
-  weaponFab: {fileID: 5190462479071628253, guid: 1cae8fa68681c7d4ab7a9b2e5174b47c,
-    type: 3}
-  weaponFabAi: {fileID: 5190462479071628253, guid: ac06c7691e8a38340a8238834c22e6ba,
+  border: 1
+  weaponFab: {fileID: 7770787496878760606, guid: 63f584a9b1db3904795c0d99ea11c9fe,
     type: 3}
 --- !u!54 &7989265571146224288
 Rigidbody:

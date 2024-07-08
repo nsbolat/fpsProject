@@ -160,9 +160,11 @@ public class fps_CharacterController : MonoBehaviour
         }else if (_playerStance == PlayerStance.Crouch)
         {
             playerSettings.speedEffector = playerSettings.crouchSpeedEffector;
+            isSprint = false;
         }else if (_playerStance == PlayerStance.Prone)
         {
             playerSettings.speedEffector = playerSettings.proneSpeedEffector;
+            isSprint = false;
         }
         else
         {
@@ -302,7 +304,13 @@ public class fps_CharacterController : MonoBehaviour
             isSprint = false;
             return;
         }
-        isSprint = !isSprint;
+
+        if (input_Movement.magnitude >= 0.2f)
+        {
+            isSprint = !isSprint;
+        }
+       
+        
     }  
     private void stopSprint()
     {

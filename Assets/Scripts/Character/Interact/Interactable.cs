@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,13 @@ public abstract class Interactable : MonoBehaviour // "abstract" unreal'daki gib
     public bool useEvents;
     [SerializeField]
     public string promptMessage; //Interact Text
+    public bool border;
+
+    private void Awake()
+    {
+        
+    }
+
     public void BaseInteract() //oyuncunun çağıracağı fonksiyon
     {
         if (useEvents)

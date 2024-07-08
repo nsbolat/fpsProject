@@ -211,7 +211,7 @@ public class GunSystem : MonoBehaviour
             isAds = false;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, hipfirePosition, Time.deltaTime * adsSpeed);
             weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, hipfireRotation, Time.deltaTime * adsSpeed); // Reset local rotation
-        
+
             crosshair.color = new Color(255, 255, 255, 255);
             camRecoil.aiming = false;
             weaponRecoil.aiming = false;

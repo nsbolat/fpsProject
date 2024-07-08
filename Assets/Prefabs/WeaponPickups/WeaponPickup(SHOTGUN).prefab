@@ -205,9 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 0
   promptMessage: PICK UP "SHOTGUN"
-  weaponFab: {fileID: 2964334886021685628, guid: 293695545c9db334fa9f6ef03a846022,
-    type: 3}
-  weaponFabAi: {fileID: 2964334886021685628, guid: f74cdb6164c43c04fbfccff65b870f17,
+  border: 0
+  weaponFab: {fileID: 2776191961530905226, guid: 76fcc5e7453d0cb47a070eb778a8733c,
     type: 3}
 --- !u!54 &7989265571146224288
 Rigidbody:
