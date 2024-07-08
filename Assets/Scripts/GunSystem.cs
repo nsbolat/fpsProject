@@ -1,12 +1,9 @@
-using System;
-using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
-using static fps_Models;
 
 public class GunSystem : MonoBehaviour
 {
@@ -15,8 +12,7 @@ public class GunSystem : MonoBehaviour
     public Transform LeftHandTarget;
     [Header("Gun Stats")]
     public DefaultInput gunDefaultInput;
-    public PlayerSettingsModel playerSettings;
-    public PlayerStance _playerStance;
+    public fps_CharacterController FPSCharacterController;
 
     [Header("Gun Stats")]
     public int damage;
@@ -80,8 +76,6 @@ public class GunSystem : MonoBehaviour
     public float gunRotationSpeed;
     public float gunReturnSpeed;
 
-    public AnimationClip weaoponAnimation;
-
     private void OnEnable()
     {
         gunCamRecoilUpdate();
@@ -123,6 +117,11 @@ public class GunSystem : MonoBehaviour
         {
             audioSource = gameObject.AddComponent<AudioSource>();
         }
+        if (FPSCharacterController == null)
+        {
+            FPSCharacterController = GameObject.FindWithTag("Player").GetComponent<fps_CharacterController>();
+        }
+        
     }
 
     private void Update()
@@ -130,6 +129,7 @@ public class GunSystem : MonoBehaviour
         
         // SetText
         ammoUI.SetText(bulletsLeft + " / " + magazineSize);
+        sprintAnim();
     }
 
     public void gunCamRecoilUpdate()
@@ -158,7 +158,7 @@ public class GunSystem : MonoBehaviour
         }
 
         // Shoot
-        if (readyToShoot && shooting && !reloading && bulletsLeft > 0)
+        if (readyToShoot && shooting && !FPSCharacterController.isSprint &&!reloading && bulletsLeft > 0)
         {
             bulletsShot = bulletsPerTap;
             StartCoroutine(Shoot(cam.transform.forward, cam.transform.position));
@@ -188,7 +188,7 @@ public class GunSystem : MonoBehaviour
     #region - ADS -
     public void ADS()
     {
-        if (isAiming && !reloading)
+        if (isAiming && !reloading && !FPSCharacterController.isSprint)
         {
             isAds = true;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, adsPosition, Time.deltaTime * adsSpeed);
@@ -354,5 +354,18 @@ public class GunSystem : MonoBehaviour
         reloading = false;
         animator.SetBool("isReload", false);
 
+    }
+
+    private void sprintAnim()
+    {
+        if (FPSCharacterController.isSprint)
+        {
+        animator.SetBool("isSprint",true);    
+        }
+        else
+        {
+            animator.SetBool("isSprint",false);    
+
+        }
     }
 }

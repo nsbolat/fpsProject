@@ -51317,26 +51317,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RightHandTarget: {fileID: 0}
   LeftHandTarget: {fileID: 0}
-  playerSettings:
-    ViewXsens: 0
-    ViewYsens: 0
-    CameraFov: 0
-    ViewXinverted: 0
-    ViewYinverted: 0
-    walkFowardSpeed: 0
-    walkingStrafeSpeed: 0
-    runFowardSpeed: 0
-    runStrafeSpeed: 0
-    movementSmoothing: 0
-    sprintHold: 0
-    jumpingHeight: 0
-    jumpingFalloff: 0
-    jumpingFallSmooth: 0
-    speedEffector: 1
-    crouchSpeedEffector: 0
-    proneSpeedEffector: 0
-    fallingSpeedEffector: 0
-  _playerStance: 0
+  FPSCharacterController: {fileID: 0}
   damage: 10
   timeBetweenShooting: 0.25
   spread: 0.01
@@ -51400,7 +51381,6 @@ MonoBehaviour:
   gunRecoilRotationAiming: {x: 35, y: 2, z: 25}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
-  weaoponAnimation: {fileID: 0}
 --- !u!1 &1800883703
 GameObject:
   m_ObjectHideFlags: 0
@@ -55150,7 +55130,7 @@ Transform:
   m_GameObject: {fileID: 2883860571734887547}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -0.26300025, z: 1.4999999}
+  m_LocalPosition: {x: 0, y: -0.26300013, z: 1.4999996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55158,7 +55138,7 @@ Transform:
   - {fileID: 2783787210023873610}
   - {fileID: 8120622179243184170}
   - {fileID: 4838601243734451839}
-  m_Father: {fileID: 7555331286046167392}
+  m_Father: {fileID: 7555331286046167302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1634217898303591646
 Transform:
@@ -55665,26 +55645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RightHandTarget: {fileID: 0}
   LeftHandTarget: {fileID: 0}
-  playerSettings:
-    ViewXsens: 0
-    ViewYsens: 0
-    CameraFov: 0
-    ViewXinverted: 0
-    ViewYinverted: 0
-    walkFowardSpeed: 0
-    walkingStrafeSpeed: 0
-    runFowardSpeed: 0
-    runStrafeSpeed: 0
-    movementSmoothing: 0
-    sprintHold: 0
-    jumpingHeight: 0
-    jumpingFalloff: 0
-    jumpingFallSmooth: 0
-    speedEffector: 1
-    crouchSpeedEffector: 0
-    proneSpeedEffector: 0
-    fallingSpeedEffector: 0
-  _playerStance: 0
+  FPSCharacterController: {fileID: 0}
   damage: 10
   timeBetweenShooting: 0.25
   spread: 0.02
@@ -55748,7 +55709,6 @@ MonoBehaviour:
   gunRecoilRotationAiming: {x: 35, y: 2, z: 25}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
-  weaoponAnimation: {fileID: 0}
 --- !u!4 &2709997346319633372
 Transform:
   m_ObjectHideFlags: 0
@@ -56131,6 +56091,7 @@ MonoBehaviour:
   playerProneStance:
     cameraHeight: -0.6
     StanceCollider: {fileID: 4283267318991509695}
+  isSprint: 0
   cam: {fileID: 7912412151079770271}
 --- !u!4 &3234750276994013650
 Transform:
@@ -59522,6 +59483,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1605998754568543181}
   - {fileID: 7555331286046167392}
   m_Father: {fileID: 7555331286046167406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60152,9 +60114,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7555331286046002538}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0012917004, y: 0.70710546, z: 0.0012917004, w: 0.70710576}
-  m_LocalPosition: {x: -1.3536842e-30, y: 0.010561533, z: 0.96750647}
-  m_LocalScale: {x: 0.99999994, y: 0.9999998, z: 0.99999994}
+  m_LocalRotation: {x: 0.0012917222, y: 0.70710546, z: 0.0012916626, w: 0.7071058}
+  m_LocalPosition: {x: 0, y: 0.010561347, z: 0.96750635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7555331286046167402}
@@ -60335,7 +60297,6 @@ Transform:
   - {fileID: 7555331286046167334}
   - {fileID: 7555331286046167342}
   - {fileID: 7555331286046167370}
-  - {fileID: 1605998754568543181}
   m_Father: {fileID: 7555331286046167302}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &7555331286046167394

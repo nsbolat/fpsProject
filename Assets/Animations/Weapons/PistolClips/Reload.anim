@@ -2420,7 +2420,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2432,7 +2432,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2444,7 +2444,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2492,7 +2492,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2504,7 +2504,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -2516,7 +2516,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Magazin/LeftPistolGrip
     classID: 4
     script: {fileID: 0}
     flags: 0

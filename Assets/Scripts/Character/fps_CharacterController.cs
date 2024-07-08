@@ -58,7 +58,7 @@ public class fps_CharacterController : MonoBehaviour
     private float stanceCapsuleHeight;
     private float stanceCapsuleHeightVelocity;
 
-    private bool isSprint;
+    public bool isSprint;
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
 

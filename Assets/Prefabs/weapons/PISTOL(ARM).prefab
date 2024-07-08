@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 979378414702207549}
-  - component: {fileID: 6986290383077079170}
+  - component: {fileID: 3155201423543156613}
   m_Layer: 8
   m_Name: WeaponSway
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7637774513368558497}
   m_Father: {fileID: 5472720597727145076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6986290383077079170
+--- !u!114 &3155201423543156613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,26 +42,38 @@ MonoBehaviour:
   m_GameObject: {fileID: 20739321821423244}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeb17ea1751d1e74ab9deabdbe1371ec, type: 3}
+  m_Script: {fileID: 11500000, guid: aa80fd41f5261e34bb1d60abadf4a09c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 0.02
-  maxAmount: 0.06
-  smoothAmount: 6
-  playerCotroller: {fileID: 0}
-  rotationAmount: 5
-  maxRotationAmount: 12
-  smoothRotationAmount: 6
-  rotatitionX: 1
-  rotatitionY: 1
-  rotatitionZ: 1
-  speedCurve: 0
-  travelLimit: {x: 0.03, y: 0.03, z: 0.03}
-  bobLimit: {x: 0.03, y: 0.03, z: 0.03}
-  travelLimitAim: {x: 0.005, y: 0.005, z: 0.03}
-  bobLimitAim: {x: 0.005, y: 0.005, z: 0.03}
-  AdvancedWeaponRecoil: {fileID: 7046294073586654730}
-  bobPosition: {x: 0, y: 0, z: 0}
+  mover: {fileID: 0}
+  gunSystem: {fileID: 0}
+  step: 1
+  maxStepDistance: 1
+  stepADS: 1
+  maxStepDistanceADS: 1
+  stepAir: 1
+  maxStepDistanceAir: 1
+  rotationStep: 15
+  maxRotationStep: 50
+  rotationStepADS: 5
+  maxRotationStepADS: 30
+  rotationStepAir: 30
+  maxRotationStepAir: 50
+  smooth: 0
+  bobbingSpeed: 7
+  bobbingAmount: 1
+  sprintBobbingMultiplier: 1.3
+  midpoint: 0
+  travelLimit: {x: 5, y: 5, z: 5}
+  bobLimit: {x: 10, y: 10, z: 10}
+  travelLimitADS: {x: 1, y: 1, z: 1}
+  bobLimitADS: {x: 5, y: 5, z: 5}
+  travelLimitAir: {x: 5, y: 5, z: 1}
+  bobLimitAir: {x: 5, y: 5, z: 5}
+  multiplier: {x: 1.5, y: 2, z: 2}
+  multiplierADS: {x: 1, y: 1, z: 1}
+  multiplierAir: {x: 1, y: 1, z: 1}
+  sprintMultiplier: {x: 4, y: 6, z: 2}
 --- !u!1 &117768715227814137
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,7 +540,6 @@ Transform:
   - {fileID: 3082039942781780888}
   - {fileID: 8948092895392629002}
   - {fileID: 4145630745949663320}
-  - {fileID: 137889576775645936}
   m_Father: {fileID: 4618120994015543814}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1853025238359423138
@@ -843,6 +854,7 @@ Transform:
   - {fileID: 3324303250309541098}
   - {fileID: 1961992335322099422}
   - {fileID: 213752159474190631}
+  - {fileID: 137889576775645936}
   m_Father: {fileID: 8335567983770193067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5570777145446010080
@@ -1938,12 +1950,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5816804656371159768}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3785595, y: -0.57448393, z: -0.6023034, w: -0.40483516}
-  m_LocalPosition: {x: -0.0048, y: -0.0738, z: 0.1953}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.3785595, y: -0.574484, z: -0.6023034, w: -0.40483522}
+  m_LocalPosition: {x: -0.0036923042, y: -0.049153842, z: 0.15023077}
+  m_LocalScale: {x: 0.76923066, y: 0.76923066, z: 0.7692308}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8335567983770193067}
+  m_Father: {fileID: 4145630745949663320}
   m_LocalEulerAnglesHint: {x: -86.899, y: -350.287, z: 102.983}
 --- !u!1 &5823289506492214494
 GameObject:
@@ -2972,26 +2984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RightHandTarget: {fileID: 137889576775645936}
   LeftHandTarget: {fileID: 530447142972337757}
-  playerSettings:
-    ViewXsens: 0
-    ViewYsens: 0
-    CameraFov: 0
-    ViewXinverted: 0
-    ViewYinverted: 0
-    walkFowardSpeed: 0
-    walkingStrafeSpeed: 0
-    runFowardSpeed: 0
-    runStrafeSpeed: 0
-    movementSmoothing: 0
-    sprintHold: 0
-    jumpingHeight: 0
-    jumpingFalloff: 0
-    jumpingFallSmooth: 0
-    speedEffector: 1
-    crouchSpeedEffector: 0
-    proneSpeedEffector: 0
-    fallingSpeedEffector: 0
-  _playerStance: 0
+  FPSCharacterController: {fileID: 0}
   damage: 10
   timeBetweenShooting: 0.25
   spread: 0.01
@@ -3055,7 +3048,6 @@ MonoBehaviour:
   gunRecoilRotationAiming: {x: 50, y: 4, z: 25}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
-  weaoponAnimation: {fileID: 0}
 --- !u!65 &4504342021514290780
 BoxCollider:
   m_ObjectHideFlags: 0
