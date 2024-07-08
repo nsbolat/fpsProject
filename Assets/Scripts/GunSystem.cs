@@ -10,6 +10,10 @@ using static fps_Models;
 
 public class GunSystem : MonoBehaviour
 {
+    [Header("ARM TARGET")] 
+    public Transform RightHandTarget;
+    public Transform LeftHandTarget;
+    [Header("Gun Stats")]
     public DefaultInput gunDefaultInput;
     public PlayerSettingsModel playerSettings;
     public PlayerStance _playerStance;
@@ -60,8 +64,9 @@ public class GunSystem : MonoBehaviour
     public Transform AdsPositionTransform;
     [Header("ADS")]
     public Vector3 hipfirePosition;
+    public Quaternion hipfireRotation;
     public GameObject sightTransform;
-    public Vector3 adsPosition;
+    public Vector3 adsPosition,adsRotation;
     public float adsSpeed;
     public Image crosshair;
     public float camFovAds, camFovDefault;
@@ -101,6 +106,7 @@ public class GunSystem : MonoBehaviour
         #endregion
 
         hipfirePosition = weaponModel.transform.localPosition;
+        hipfireRotation = weaponModel.transform.localRotation;
         adsPosition = AdsPositionTransform.transform.localPosition;
         camRecoil = GameObject.Find("CameraRecoil").GetComponent<AdvancedCamRecoil>();
         cam = GameObject.FindWithTag("Player").GetComponentInChildren<Camera>();
@@ -186,6 +192,8 @@ public class GunSystem : MonoBehaviour
         {
             isAds = true;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, adsPosition, Time.deltaTime * adsSpeed);
+            weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, Quaternion.Euler(adsRotation), Time.deltaTime * adsSpeed); // Apply local rotation
+        
             crosshair.color = new Color(0, 0, 0, 0);
             camRecoil.aiming = true;
             weaponRecoil.aiming = true;
@@ -195,6 +203,8 @@ public class GunSystem : MonoBehaviour
         {
             isAds = false;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, hipfirePosition, Time.deltaTime * adsSpeed);
+            weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, hipfireRotation, Time.deltaTime * adsSpeed); // Reset local rotation
+        
             crosshair.color = new Color(255, 255, 255, 255);
             camRecoil.aiming = false;
             weaponRecoil.aiming = false;
@@ -217,6 +227,7 @@ public class GunSystem : MonoBehaviour
     public IEnumerator Shoot(Vector3 target, Vector3 AttackPoint)
     {
         readyToShoot = false;
+        animator.SetBool("Fire",true);
 
         // Spread
         float x = Random.Range(-spread, spread);
@@ -266,6 +277,7 @@ public class GunSystem : MonoBehaviour
         
         yield return new WaitForSeconds(timeBetweenShooting);
         readyToShoot = true;
+        animator.SetBool("Fire",false);
         
     }
     #endregion
@@ -320,6 +332,7 @@ public class GunSystem : MonoBehaviour
     public void ResetShot()
     {
         readyToShoot = true;
+        animator.SetBool("Fire",false);
     }
 
     private void ResetNoAmmoCooldown()

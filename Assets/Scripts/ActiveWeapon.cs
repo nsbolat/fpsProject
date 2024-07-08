@@ -9,7 +9,9 @@ public class ActiveWeapon : MonoBehaviour
     public GameObject itemSlotPrefab;
     public Transform inventoryBarTransform;
     public GameObject currentWeaponUI;
-    public Image cuWeapon; // Reference to your WeaponPanel GameObject
+    public Image cuWeapon;
+    public ArmGrip armGrip;
+    public Animator spineAnim;
 
     public Transform slot1, slot2, slot3;
 
@@ -36,7 +38,7 @@ public class ActiveWeapon : MonoBehaviour
         {
             currentWeaponUI.GetComponent<CanvasGroup>().alpha = 0;
         }
-        
+
         // Weapon switch input handling
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -76,15 +78,38 @@ public class ActiveWeapon : MonoBehaviour
         // Equip weapon to the first available slot
         if (slot1.childCount == 0)
         {
-            EquipToSlot(newWeapon, slot1, 1);
+            EquipToSlot(newWeapon, slot1, 0);
+            armGrip.UpdateIK(weapon.RightHandTarget, weapon.LeftHandTarget);
+            UpdateAnimatorLayers(weapon.label);
         }
         else if (slot2.childCount == 0)
         {
-            EquipToSlot(newWeapon, slot2, 2);
+            EquipToSlot(newWeapon, slot2, 1);
         }
         else if (slot3.childCount == 0)
         {
-            EquipToSlot(newWeapon, slot3, 3);
+            EquipToSlot(newWeapon, slot3, 2);
+        }
+
+        // If this is the first weapon being equipped, update IK and animator layers
+        if (currentWeaponIndex == -1)
+        {
+            currentWeaponIndex = 0;
+            weapon = newWeapon;
+            weapon.gameObject.SetActive(true);
+
+
+            // Activate the "Selected" object of the slot containing the selected weapon
+            Transform selectedSlot = inventoryBarTransform.GetChild(currentWeaponIndex);
+            if (selectedSlot != null)
+            {
+                Transform selected = selectedSlot.Find("Selected");
+                if (selected != null)
+                {
+                    selected.gameObject.SetActive(true);
+                    UpdateWeaponPanelIcon(newWeapon.icon);
+                }
+            }
         }
     }
 
@@ -98,20 +123,20 @@ public class ActiveWeapon : MonoBehaviour
 
         inventoryBarTransform.GetComponent<UI_Inventory>().ShowInventoryBar();
 
-        // UI için ItemSlot prefabını oluşturun
-        GameObject itemSlotGO = Instantiate(itemSlotPrefab, inventoryBarTransform); // inventoryBarTransform, ItemSlot prefabını içeren parent objenin transformu olmalıdır
+        // Create ItemSlot prefab for UI
+        GameObject itemSlotGO = Instantiate(itemSlotPrefab, inventoryBarTransform); // inventoryBarTransform should be the parent object's transform containing ItemSlot prefab
         itemSlotGO.name = newWeapon.label;
-        // ItemSlot componentini alın
+        // Get ItemSlot component
         ItemSlot itemSlot = itemSlotGO.GetComponent<ItemSlot>();
 
-        // Silahın ikonunu ve etiketini ItemSlot'a atayın
+        // Assign weapon icon and label to ItemSlot
         if (itemSlot != null)
         {
-            itemSlot.SetIcon(newWeapon.icon); // icon, silahın ikonunu temsil eden bir değişken olmalı
-            itemSlot.SetLabel(newWeapon.label); // label, silahın etiketini temsil eden bir değişken olmalı
+            itemSlot.SetIcon(newWeapon.icon); // icon should represent the weapon's icon
+            itemSlot.SetLabel(newWeapon.label); // label should represent the weapon's label
             itemSlot.SetSlotIndex(slotIndex);
         }
-        
+
         // Update WeaponPanel icon
 
         if (currentWeaponIndex == -1)
@@ -119,7 +144,7 @@ public class ActiveWeapon : MonoBehaviour
             currentWeaponIndex = 0;
             weapon = newWeapon;
             weapon.gameObject.SetActive(true); // Activate the first weapon if it's the first one
-            // Seçilen silahın bulunduğu slotun "Selected" objesini aktif hale getirin
+            // Activate the "Selected" object of the slot containing the selected weapon
             Transform selectedSlot = inventoryBarTransform.GetChild(currentWeaponIndex);
             if (selectedSlot != null)
             {
@@ -136,14 +161,14 @@ public class ActiveWeapon : MonoBehaviour
     public void SwitchWeapon(int slotIndex)
     {
         inventoryBarTransform.GetComponent<UI_Inventory>().ShowInventoryBar();
-        
-        // Kontrolü ekle: Eğer mevcut silah reloading veya shooting ise işlemi engelle
+
+        // Add check: If current weapon is reloading or shooting, prevent the switch
         if (weapon && (weapon.reloading || weapon.shooting))
         {
             return;
         }
 
-        // Kontrolü ekle: Eğer mevcut silah zaten seçili slot ise işlemi engelle
+        // Add check: If current weapon is already in the selected slot, prevent the switch
         if (currentWeaponIndex == slotIndex)
         {
             return;
@@ -156,16 +181,18 @@ public class ActiveWeapon : MonoBehaviour
 
         if (weapon)
         {
-            weapon.ResetShot(); // Current weapon reset
+            weapon.ResetShot(); // Reset the current weapon
             weapon.gameObject.SetActive(false);
         }
 
         currentWeaponIndex = slotIndex;
         weapon = weapons[slotIndex];
         weapon.gameObject.SetActive(true);
-        
 
-        // UI'deki tüm item slotlarındaki "Selected" objelerini devre dışı bırakın
+        // Update IK targets
+        armGrip.UpdateIK(weapon.RightHandTarget, weapon.LeftHandTarget);
+
+        // Deactivate the "Selected" objects in all item slots in the UI
         foreach (Transform child in inventoryBarTransform)
         {
             ItemSlot itemSlot = child.GetComponent<ItemSlot>();
@@ -179,7 +206,7 @@ public class ActiveWeapon : MonoBehaviour
             }
         }
 
-        // Seçilen silahın bulunduğu slotun "Selected" objesini aktif hale getirin
+        // Activate the "Selected" object of the slot containing the selected weapon
         Transform selectedSlot = inventoryBarTransform.GetChild(slotIndex);
         if (selectedSlot != null)
         {
@@ -189,9 +216,12 @@ public class ActiveWeapon : MonoBehaviour
                 selected.gameObject.SetActive(true);
             }
         }
-        
+
         // Update WeaponPanel icon
         UpdateWeaponPanelIcon(weapon.icon);
+
+        // Update animator layers
+        UpdateAnimatorLayers(weapon.label);
     }
 
     private void SwitchToNextWeapon()
@@ -219,6 +249,32 @@ public class ActiveWeapon : MonoBehaviour
     private void UpdateWeaponPanelIcon(Sprite icon)
     {
         Image weaponIconImage = cuWeapon;
-            weaponIconImage.sprite = icon;
+        weaponIconImage.sprite = icon;
+    }
+
+    private void UpdateAnimatorLayers(string weaponLabel)
+    {
+        // Reset all layers to 0
+        for (int i = 0; i < spineAnim.layerCount; i++)
+        {
+            spineAnim.SetLayerWeight(i, 0);
+        }
+
+        // Activate the layer corresponding to the current weapon
+        switch (weaponLabel)
+        {
+            case "Pistol":
+                spineAnim.SetLayerWeight(spineAnim.GetLayerIndex("Pistol"), 1);
+                break;
+            case "Rifle":
+                spineAnim.SetLayerWeight(spineAnim.GetLayerIndex("Rifle"), 1);
+                break;
+            case "Shotgun":
+                spineAnim.SetLayerWeight(spineAnim.GetLayerIndex("Shotgun"), 1);
+                break;
+            default:
+                spineAnim.SetLayerWeight(spineAnim.GetLayerIndex("Hand"), 1);
+                break;
+        }
     }
 }
