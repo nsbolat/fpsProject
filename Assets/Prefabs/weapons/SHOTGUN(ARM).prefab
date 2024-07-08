@@ -543,7 +543,9 @@ MonoBehaviour:
   FPSCharacterController: {fileID: 0}
   damage: 20
   timeBetweenShooting: 0.7
-  spread: 0.06
+  spreadHipfire: 0.07
+  spreadADS: 0.03
+  spreadCurrent: 0.06
   range: 75
   reloadTime: 2.5
   recoilForce: 20
@@ -689,7 +691,6 @@ MonoBehaviour:
   bobLimit: {x: 10, y: 10, z: 10}
   travelLimitADS: {x: 1, y: 1, z: 1}
   bobLimitADS: {x: 5, y: 5, z: 5}
-  bobExaggeration: 0
   multiplier: {x: 1.5, y: 2, z: 2}
   multiplierADS: {x: 1, y: 1, z: 1}
   sprintMultiplier: {x: 4, y: 6, z: 2}

@@ -134,7 +134,7 @@ public class ActiveWeapon : MonoBehaviour
         {
             itemSlot.SetIcon(newWeapon.icon); // icon should represent the weapon's icon
             itemSlot.SetLabel(newWeapon.label); // label should represent the weapon's label
-            itemSlot.SetSlotIndex(slotIndex);
+            itemSlot.SetSlotIndex(slotIndex+1);
         }
 
         // Update WeaponPanel icon

@@ -11,6 +11,10 @@ TagManager:
   - Metal
   - ExplosiveBarrel
   - Inventory
+  - Footsteps/Grass
+  - Footsteps/Metal
+  - Footsteps/Wood
+  - Footsteps/Rock
   layers:
   - Default
   - TransparentFX

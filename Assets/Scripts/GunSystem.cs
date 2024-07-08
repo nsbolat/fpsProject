@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -16,7 +17,10 @@ public class GunSystem : MonoBehaviour
 
     [Header("Gun Stats")]
     public int damage;
-    public float timeBetweenShooting, spread, range, reloadTime, recoilForce, timeBetweenShots;
+
+    public float timeBetweenShooting;
+    [FormerlySerializedAs("spread")] public float spreadHipfire, spreadADS, spreadCurrent;
+    public float range, reloadTime, recoilForce, timeBetweenShots;
     public int magazineSize, bulletsPerTap;
     public bool allowButtonHold;
     int bulletsLeft, bulletsShot;
@@ -126,7 +130,7 @@ public class GunSystem : MonoBehaviour
 
     private void Update()
     {
-        
+        MyInput();
         // SetText
         ammoUI.SetText(bulletsLeft + " / " + magazineSize);
         sprintAnim();
@@ -181,6 +185,8 @@ public class GunSystem : MonoBehaviour
                 Invoke("ResetNoAmmoCooldown", 0.25f);
             }
         }
+
+        ADS(); // ADS durumu ve yayılımı güncelle
     }
     
     #endregion
@@ -193,11 +199,12 @@ public class GunSystem : MonoBehaviour
             isAds = true;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, adsPosition, Time.deltaTime * adsSpeed);
             weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, Quaternion.Euler(adsRotation), Time.deltaTime * adsSpeed); // Apply local rotation
-        
+            
             crosshair.color = new Color(0, 0, 0, 0);
             camRecoil.aiming = true;
             weaponRecoil.aiming = true;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, camFovAds, Time.deltaTime * adsSpeed);
+            spreadCurrent = spreadADS; // ADS durumunda yayılımı güncelle
         }
         else
         {
@@ -209,6 +216,7 @@ public class GunSystem : MonoBehaviour
             camRecoil.aiming = false;
             weaponRecoil.aiming = false;
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, camFovDefault, Time.deltaTime * adsSpeed);
+            spreadCurrent = spreadHipfire; // Hipfire durumunda yayılımı güncelle
         }
     }
 
@@ -230,8 +238,8 @@ public class GunSystem : MonoBehaviour
         animator.SetBool("Fire",true);
 
         // Spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
+        float x = Random.Range(-spreadCurrent, spreadCurrent);
+        float y = Random.Range(-spreadCurrent, spreadCurrent);
 
         // Calculate Direction with Spread
 

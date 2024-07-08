@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 using static fps_Models;
 
 public class fps_CharacterController : MonoBehaviour
@@ -61,6 +62,18 @@ public class fps_CharacterController : MonoBehaviour
     public bool isSprint;
     private Vector3 newMovementSpeed;
     private Vector3 newMovementSpeedVelocity;
+    
+    [Header("FOOTSTEPS")]
+    [Space(10)]
+    public AudioClip[] metalFS,woodFS,grassFS,rockFS;
+    public float baseStepSpeed=0.5f;
+    public float crouchStepMultiplier = 1.5f;
+    public float sprintStepMultiplier = 0.6f;
+    public AudioSource footStepsSource;
+    public float footStepTime = 0f;
+    public float footstepInterval = 0.5f;
+    [Range(0.0f,1.0f)]
+    public float fs_VolumeMin, fs_VolumeMax;
 
     //[Header("Anim")] 
    // public Animator fpsAnim;
@@ -170,6 +183,7 @@ public class fps_CharacterController : MonoBehaviour
         velocity.y += gravityAmount * Time.deltaTime;
         _characterController.Move(velocity * Time.deltaTime);
         _characterController.Move(movementSpeed);
+        PlayFootStep();
     }
 
     /* private void handleAnimation() //test yürüme anim
@@ -297,5 +311,65 @@ public class fps_CharacterController : MonoBehaviour
             isSprint = false;
         }
     }
+    void PlayFootStep()
+    {
+        if (!isGrounded || input_Movement == Vector2.zero)
+        {
+            footStepTime = 0f;
+            return;
+        }
+
+        footStepTime -= Time.deltaTime;
+        float stepSpeed = baseStepSpeed;
+
+        // Adjust step speed based on stance
+        switch (_playerStance)
+        {
+            case PlayerStance.Crouch:
+                stepSpeed *= crouchStepMultiplier;
+                break;
+            case PlayerStance.Prone:
+                return;
+            default:
+                break;
+        }
+
+        // Adjust step speed based on movement (walking vs running)
+        if (isSprint)
+        {
+            stepSpeed *= sprintStepMultiplier;
+        }
+
+        if (footStepTime <= 0)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(feetTransform.position, Vector3.down, out hit, 3, playerMask))
+            {
+                switch (hit.collider.tag)
+                {
+                    case "Footsteps/Grass":
+                        footStepsSource.PlayOneShot(grassFS[Random.Range(0, grassFS.Length)]);
+                        break;
+                    case "Footsteps/Metal":
+                        footStepsSource.PlayOneShot(metalFS[Random.Range(0, metalFS.Length)]);
+                        break;
+                    case "Footsteps/Rock":
+                        footStepsSource.PlayOneShot(rockFS[Random.Range(0, rockFS.Length)]);
+                        break;
+                    case "Footsteps/Wood":
+                        footStepsSource.PlayOneShot(woodFS[Random.Range(0, woodFS.Length)]);
+                        break;
+                    default:
+                        footStepsSource.PlayOneShot(rockFS[Random.Range(0, rockFS.Length)]);
+                        break;
+                }
+            }
+
+            footStepTime = stepSpeed;
+        }
+    }
+
+
     
 }
