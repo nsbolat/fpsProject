@@ -8,7 +8,8 @@ public abstract class Interactable : MonoBehaviour // "abstract" unreal'daki gib
     public bool useEvents;
     [SerializeField]
     public string promptMessage; //Interact Text
-    public bool border;
+    public bool isHoldable; // Nesnenin basılı tutma ile mi yoksa tek tıklama ile mi etkileşime gireceğini belirler
+    public float requiredHoldTime = 2f; // Basılı tutma süresi (varsayılan: 2 saniye)
 
     private void Awake()
     {
@@ -24,9 +25,18 @@ public abstract class Interactable : MonoBehaviour // "abstract" unreal'daki gib
         Interact();
     }
 
+    public void HoldBaseInteract()
+    {
+        HoldInteract();
+    }
+
     protected virtual void Interact()
     {
         //Temel etkileşimli betikten gelen herhangi bir kod çağrısı olmayacak.
        // Herhangi bir özel kod, miras aldığımız betiklerdeki bu yöntemin içine girecek.
+    }
+    protected virtual void HoldInteract()
+    {
+        // Basılı tutma işlemleri burada yer alacak
     }
 }
