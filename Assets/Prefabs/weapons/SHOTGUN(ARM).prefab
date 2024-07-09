@@ -545,7 +545,7 @@ MonoBehaviour:
   timeBetweenShooting: 0.7
   spreadHipfire: 0.07
   spreadADS: 0.03
-  spreadCurrent: 0.06
+  spreadCurrent: 0.07
   range: 75
   reloadTime: 2.5
   recoilForce: 20

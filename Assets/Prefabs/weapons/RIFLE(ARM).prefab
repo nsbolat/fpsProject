@@ -581,8 +581,8 @@ MonoBehaviour:
   damage: 20
   timeBetweenShooting: 0.1
   spreadHipfire: 0.06
-  spreadADS: 0.02
-  spreadCurrent: 0
+  spreadADS: 0.01
+  spreadCurrent: 0.06
   range: 100
   reloadTime: 2.7
   recoilForce: 5
