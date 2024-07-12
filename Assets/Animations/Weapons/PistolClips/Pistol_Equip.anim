@@ -27,19 +27,37 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.38333333
-        value: {x: -1.938, y: 163.346, z: 41.781}
-        inSlope: {x: 60.52138, y: 118.618004, z: -76.18345}
-        outSlope: {x: 60.52138, y: 118.618004, z: -76.18345}
+        time: 0.11666667
+        value: {x: -57.346626, y: 128.52328, z: -23.09353}
+        inSlope: {x: 117.71476, y: 503.05847, z: -152.2086}
+        outSlope: {x: 117.71476, y: 503.05847, z: -152.2086}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.14520355}
+      - serializedVersion: 3
+        time: 0.18333334
+        value: {x: -48.795803, y: 159.26987, z: -28.209375}
+        inSlope: {x: 132.44156, y: 368.14163, z: -9.402456}
+        outSlope: {x: 132.44156, y: 368.14163, z: -9.402456}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.48333332
-        value: {x: 5.375, y: 177.679, z: 30.248}
-        inSlope: {x: 0, y: 46.419987, z: -208.905}
-        outSlope: {x: 0, y: 46.419987, z: -208.905}
+        time: 0.23333333
+        value: {x: -40.545742, y: 170.82748, z: -26.688335}
+        inSlope: {x: 192.50032, y: 65.364136, z: 65.66772}
+        outSlope: {x: 192.50032, y: 65.364136, z: 65.66772}
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+      - serializedVersion: 3
+        time: 0.5
+        value: {x: 4.314, y: 178.998, z: -0.269}
+        inSlope: {x: 0, y: 11.451417, z: 2.3057113}
+        outSlope: {x: 0, y: 11.451417, z: 2.3057113}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -151,19 +169,19 @@ AnimationClip:
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
-        time: 0.4
-        value: {x: -0.001, y: -0.047, z: 0.271}
-        inSlope: {x: 0, y: 0, z: 0.14400008}
-        outSlope: {x: 0, y: 0, z: 0.14400008}
+        time: 0.15
+        value: {x: -0.1485711, y: -0.29029799, z: 0.193}
+        inSlope: {x: 0.88849175, y: 1.3088151, z: 0.59466916}
+        outSlope: {x: 0.88849175, y: 1.3088151, z: 0.59466916}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
-        outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
+        outWeight: {x: 0.16013074, y: 0.18954253, z: 0.18627453}
       - serializedVersion: 3
         time: 0.5
-        value: {x: -0.006, y: -0.06, z: 0.289}
-        inSlope: {x: 0, y: 0, z: 0.17236365}
-        outSlope: {x: 0, y: 0, z: 0.17236365}
+        value: {x: 0, y: -0.045, z: 0.287}
+        inSlope: {x: 0, y: 0, z: 0.14399995}
+        outSlope: {x: 0, y: 0, z: 0.14399995}
         tangentMode: 0
         weightedMode: 0
         inWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
@@ -415,17 +433,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4
-        value: -0.001
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        time: 0.15
+        value: -0.1485711
+        inSlope: 0.88849175
+        outSlope: 0.88849175
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.16013074
       - serializedVersion: 3
         time: 0.5
-        value: -0.006
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -463,17 +481,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4
-        value: -0.047
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
+        time: 0.15
+        value: -0.29029799
+        inSlope: 1.3088151
+        outSlope: 1.3088151
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.18954253
       - serializedVersion: 3
         time: 0.5
-        value: -0.06
+        value: -0.045
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -511,19 +529,19 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.4
-        value: 0.271
-        inSlope: 0.14400008
-        outSlope: 0.14400008
-        tangentMode: 136
+        time: 0.15
+        value: 0.193
+        inSlope: 0.59466916
+        outSlope: 0.59466916
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.18627453
       - serializedVersion: 3
         time: 0.5
-        value: 0.289
-        inSlope: 0.17236365
-        outSlope: 0.17236365
+        value: 0.287
+        inSlope: 0.14399995
+        outSlope: 0.14399995
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -559,17 +577,17 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38333333
-        value: -1.938
-        inSlope: 60.52138
-        outSlope: 60.52138
+        time: 0.18333334
+        value: -48.795803
+        inSlope: 132.44156
+        outSlope: 132.44156
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.48333332
-        value: 5.375
+        time: 0.5
+        value: 4.314
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -607,19 +625,19 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38333333
-        value: 163.346
-        inSlope: 118.618004
-        outSlope: 118.618004
+        time: 0.23333333
+        value: 170.82748
+        inSlope: 65.364136
+        outSlope: 65.364136
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.48333332
-        value: 177.679
-        inSlope: 46.419987
-        outSlope: 46.419987
+        time: 0.5
+        value: 178.998
+        inSlope: 11.451417
+        outSlope: 11.451417
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -655,19 +673,19 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38333333
-        value: 41.781
-        inSlope: -76.18345
-        outSlope: -76.18345
-        tangentMode: 136
+        time: 0.11666667
+        value: -23.09353
+        inSlope: -152.2086
+        outSlope: -152.2086
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.14520355
       - serializedVersion: 3
-        time: 0.48333332
-        value: 30.248
-        inSlope: -208.905
-        outSlope: -208.905
+        time: 0.5
+        value: -0.269
+        inSlope: 2.3057113
+        outSlope: 2.3057113
         tangentMode: 136
         weightedMode: 0
         inWeight: 0.33333334
@@ -1328,6 +1346,42 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
+    classID: 4
+    script: {fileID: 0}
+    flags: 0
+  - serializedVersion: 2
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Hammer
     classID: 4
     script: {fileID: 0}
@@ -1461,42 +1515,6 @@ AnimationClip:
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911/Trigger
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
-    classID: 4
-    script: {fileID: 0}
-    flags: 0
-  - serializedVersion: 2
-    curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: WeaponSway/Container/WeaponPosition/RotationPoint/WeaponRecoil/Weapon/sight_pivot/M1911/M1911
     classID: 4
     script: {fileID: 0}
     flags: 0

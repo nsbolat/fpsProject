@@ -14,6 +14,7 @@ public class AiAgent : MonoBehaviour
     public SkinnedMeshRenderer mesh;
     public enemyUIHealthBar ui;
     public Animator animator;
+    public AiSensor sensor;
     
     public delegate void AttackHitEvent(AiAgent agent);
     public event AttackHitEvent OnAttackHit;
@@ -31,6 +32,7 @@ public class AiAgent : MonoBehaviour
         animator = GetComponent<Animator>();
         mesh = GetComponentInChildren<SkinnedMeshRenderer>();
         ui = GetComponentInChildren<enemyUIHealthBar>();
+        sensor = GetComponent<AiSensor>();
 
         navMeshAgent = GetComponent<NavMeshAgent>();
         stateMachine = new AiStateMachine(this);

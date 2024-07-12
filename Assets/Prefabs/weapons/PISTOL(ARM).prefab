@@ -64,21 +64,20 @@ MonoBehaviour:
   bobbingAmount: 1
   sprintBobbingMultiplier: 1.3
   midpoint: 0.03
+  idleBobbingSpeed: 5
+  idleBobbingAmount: 1
   travelLimit: {x: 5, y: 5, z: 5}
   bobLimit: {x: 10, y: 10, z: 10}
   travelLimitADS: {x: 1, y: 1, z: 1}
   bobLimitADS: {x: 5, y: 5, z: 5}
   travelLimitAir: {x: 5, y: 5, z: 1}
   bobLimitAir: {x: 5, y: 5, z: 5}
+  bobLimitIdle: {x: 0.01, y: 0.01, z: 0.01}
   multiplier: {x: 1.5, y: 2, z: 2}
   multiplierADS: {x: 1, y: 1, z: 1}
   multiplierAir: {x: 1, y: 1, z: 1}
+  multiplierIdle: {x: 0, y: 0, z: 0}
   sprintMultiplier: {x: 4, y: 6, z: 2}
-  idleBobbingSpeed: 3
-  idleBobbingAmount: 1
-  idleBobLimit: {x: 10, y: 10, z: 10}
-  idleTravelLimit: {x: 5, y: 5, z: 5}
-  idleMultiplier: {x: 1, y: 1, z: 1}
 --- !u!1 &791600766141618903
 GameObject:
   m_ObjectHideFlags: 0

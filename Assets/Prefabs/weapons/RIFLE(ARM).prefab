@@ -212,6 +212,10 @@ MonoBehaviour:
   bobbingAmount: 1
   sprintBobbingMultiplier: 1.3
   midpoint: 0
+  idleBobbingSpeed: 0.1
+  idleBobbingAmount: 0.02
+  bobLimitIdle: {x: 0.01, y: 0.01, z: 0.01}
+  multiplierIdle: {x: 0.005, y: 0.005, z: 0.005}
   travelLimit: {x: 5, y: 5, z: 5}
   bobLimit: {x: 10, y: 10, z: 10}
   travelLimitADS: {x: 1, y: 1, z: 1}
@@ -639,8 +643,8 @@ MonoBehaviour:
   camFovDefault: 0
   isAds: 0
   isAiming: 0
-  gunRecoilRotation: {x: 30, y: 4, z: 30}
-  gunRecoilRotationAiming: {x: 20, y: 2, z: 20}
+  gunRecoilRotation: {x: 100, y: 10, z: 60}
+  gunRecoilRotationAiming: {x: 40, y: 60, z: 60}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
 --- !u!95 &5202885230017163128

@@ -15,6 +15,14 @@ public class ActiveWeapon : MonoBehaviour
 
     public Transform slot1, slot2, slot3;
 
+    public float weaponSwitchDelay = 0.5f; // Silah değiştirme süresi
+    private float switchCooldown = 0f; // Silah değiştirme bekleme süresi
+
+    public AudioSource weaponSwitchAudioSource; // Ses kaynağı
+    public AudioClip pistolSwitchSound; // Pistol değişim sesi
+    public AudioClip rifleSwitchSound; // Rifle değişim sesi
+    public AudioClip shotgunSwitchSound; // Shotgun değişim sesi
+
     private int currentWeaponIndex = -1;
 
     private void Start()
@@ -28,7 +36,9 @@ public class ActiveWeapon : MonoBehaviour
 
     private void Update()
     {
-        if (weapon)
+        switchCooldown -= Time.deltaTime;
+
+        if (weapon && switchCooldown <= 0)
         {
             weapon.MyInput();
             weapon.ADS();
@@ -40,28 +50,28 @@ public class ActiveWeapon : MonoBehaviour
         }
 
         // Weapon switch input handling
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && switchCooldown <= 0)
         {
             if (currentWeaponIndex != 0)
             {
                 SwitchWeapon(0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && switchCooldown <= 0)
         {
             SwitchWeapon(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && switchCooldown <= 0)
         {
             SwitchWeapon(2);
         }
 
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0f)
+        if (scroll > 0f && switchCooldown <= 0)
         {
             SwitchToNextWeapon();
         }
-        else if (scroll < 0f)
+        else if (scroll < 0f && switchCooldown <= 0)
         {
             SwitchToPreviousWeapon();
         }
@@ -98,7 +108,6 @@ public class ActiveWeapon : MonoBehaviour
             weapon = newWeapon;
             weapon.gameObject.SetActive(true);
 
-
             // Activate the "Selected" object of the slot containing the selected weapon
             Transform selectedSlot = inventoryBarTransform.GetChild(currentWeaponIndex);
             if (selectedSlot != null)
@@ -115,6 +124,7 @@ public class ActiveWeapon : MonoBehaviour
 
     private void EquipToSlot(GunSystem newWeapon, Transform slot, int slotIndex)
     {
+        PlaySwitchSound(newWeapon.label);
         weapons.Add(newWeapon);
         newWeapon.transform.parent = slot;
         newWeapon.transform.localPosition = Vector3.zero;
@@ -134,7 +144,7 @@ public class ActiveWeapon : MonoBehaviour
         {
             itemSlot.SetIcon(newWeapon.icon); // icon should represent the weapon's icon
             itemSlot.SetLabel(newWeapon.label); // label should represent the weapon's label
-            itemSlot.SetSlotIndex(slotIndex+1);
+            itemSlot.SetSlotIndex(slotIndex + 1);
         }
 
         // Update WeaponPanel icon
@@ -222,6 +232,12 @@ public class ActiveWeapon : MonoBehaviour
 
         // Update animator layers
         UpdateAnimatorLayers(weapon.label);
+
+        // Silah değişim süresi başlat
+        switchCooldown = weaponSwitchDelay;
+
+        // Silah değişim sesi oynat
+        PlaySwitchSound(weapon.label);
     }
 
     private void SwitchToNextWeapon()
@@ -274,6 +290,26 @@ public class ActiveWeapon : MonoBehaviour
                 break;
             default:
                 spineAnim.SetLayerWeight(spineAnim.GetLayerIndex("Hand"), 1);
+                break;
+        }
+    }
+
+    private void PlaySwitchSound(string weaponLabel)
+    {
+        if (weaponSwitchAudioSource == null) return;
+
+        switch (weaponLabel)
+        {
+            case "Pistol":
+                weaponSwitchAudioSource.PlayOneShot(pistolSwitchSound);
+                break;
+            case "Rifle":
+                weaponSwitchAudioSource.PlayOneShot(rifleSwitchSound);
+                break;
+            case "Shotgun":
+                weaponSwitchAudioSource.PlayOneShot(shotgunSwitchSound);
+                break;
+            default:
                 break;
         }
     }

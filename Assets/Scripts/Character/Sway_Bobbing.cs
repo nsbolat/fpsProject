@@ -35,6 +35,12 @@ public class SwayNBobScript : MonoBehaviour
     public float midpoint = 0.0f;
     private float timer = 0.0f;
 
+    [Header("Idle Bobbing")]
+    public float idleBobbingSpeed = 0.1f;
+    public float idleBobbingAmount = 0.02f;
+    public Vector3 bobLimitIdle = new Vector3(0.01f, 0.01f, 0.01f); // Idle bobbing limit değeri
+    public Vector3 multiplierIdle = new Vector3(0.005f, 0.005f, 0.005f); // Idle bobbing multiplier değeri
+
     public Vector3 travelLimit = Vector3.one * 0.025f;
     public Vector3 bobLimit = Vector3.one * 0.01f;
     public Vector3 travelLimitADS = Vector3.one * 0.0125f; // ADS için travel limit değeri
@@ -42,7 +48,7 @@ public class SwayNBobScript : MonoBehaviour
     public Vector3 travelLimitAir = Vector3.one * 0.05f; // Havadayken travel limit değeri
     public Vector3 bobLimitAir = Vector3.one * 0.02f; // Havadayken bob limit değeri
     Vector3 bobPosition;
-    
+
     [Header("Bob Rotation")]
     public Vector3 multiplier;
     public Vector3 multiplierADS; // ADS için multiplier değeri
@@ -145,6 +151,7 @@ public class SwayNBobScript : MonoBehaviour
         float vertical = walkInput.y;
 
         float currentBobbingSpeed = bobbingSpeed * Time.deltaTime;
+        float currentBobbingAmount = bobbingAmount;
 
         if (mover.isSprint)
         {
@@ -175,7 +182,20 @@ public class SwayNBobScript : MonoBehaviour
 
             if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
             {
-                timer = 0.0f;
+                // Idle bobbing
+                currentBobbingSpeed = idleBobbingSpeed * Time.deltaTime;
+                currentBobbingAmount = idleBobbingAmount;
+
+                waveslice = Mathf.Sin(timer);
+                timer += currentBobbingSpeed;
+                if (timer > Mathf.PI * 2)
+                {
+                    timer -= Mathf.PI * 2;
+                }
+
+                bobPosition.x = bobLimitIdle.x * Mathf.Cos(timer);
+                bobPosition.y = bobLimitIdle.y * Mathf.Sin(timer * 2);
+                bobPosition.z = bobLimitIdle.z * Mathf.Sin(timer);
             }
             else
             {
@@ -185,37 +205,21 @@ public class SwayNBobScript : MonoBehaviour
                 {
                     timer -= Mathf.PI * 2;
                 }
-            }
 
-            if (waveslice != 0)
-            {
                 Vector3 currentBobLimit = gunSystem.isAds ? bobLimitADS : bobLimit;
                 Vector3 currentTravelLimit = gunSystem.isAds ? travelLimitADS : travelLimit;
 
-                // Bobbing hareketinde yön faktörünü ekliyoruz
                 bobPosition.x = (Mathf.Cos(timer) * currentBobLimit.x * (horizontal > 0 ? 1 : -1)) - (horizontal * currentTravelLimit.x);
                 bobPosition.y = (Mathf.Sin(timer * 2) * currentBobLimit.y * (vertical > 0 ? 1 : -1)) - (vertical * currentTravelLimit.y);
-            }
-            else
-            {
-                bobPosition.x = 0;
-                bobPosition.y = midpoint;
+                bobPosition.z = Mathf.Sin(timer) * currentBobLimit.z;
             }
 
             wasGrounded = true;
         }
         else
         {
-            // Apply bobbing effect while in the air
-            if (wasGrounded)
-            {
-                // Player just jumped
-                timer = 0.0f; // Reset timer to give an initial jump impact effect
-            }
-
-            // Add a more noticeable bobbing effect when in the air
-            waveslice = Mathf.Sin(timer);
-            timer += currentBobbingSpeed / 2; // Slower bobbing speed in the air
+            // Havadayken bobbing
+            timer += currentBobbingSpeed / 2; // Havadayken bobbing daha yavaş
             if (timer > Mathf.PI * 2)
             {
                 timer -= Mathf.PI * 2;
@@ -226,6 +230,7 @@ public class SwayNBobScript : MonoBehaviour
 
             bobPosition.x = (Mathf.Cos(timer) * currentBobLimit.x) - (horizontal * currentTravelLimit.x);
             bobPosition.y = (Mathf.Sin(timer * 2) * currentBobLimit.y) - (vertical * currentTravelLimit.y);
+            bobPosition.z = Mathf.Sin(timer) * currentBobLimit.z;
 
             wasGrounded = false;
         }
@@ -237,7 +242,14 @@ public class SwayNBobScript : MonoBehaviour
 
         if (mover.isGrounded)
         {
-            currentMultiplier = gunSystem.isAds ? multiplierADS : multiplier;
+            if (Mathf.Abs(walkInput.x) == 0 && Mathf.Abs(walkInput.y) == 0)
+            {
+                currentMultiplier = multiplierIdle; // Idle bobbing multiplier
+            }
+            else
+            {
+                currentMultiplier = gunSystem.isAds ? multiplierADS : multiplier;
+            }
         }
         else
         {

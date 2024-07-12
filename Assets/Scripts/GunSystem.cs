@@ -115,7 +115,7 @@ public class GunSystem : MonoBehaviour
         camFovDefault = 75;
         bulletsLeft = magazineSize;
         readyToShoot = true;
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GameObject.FindWithTag("Player").GetComponent<AudioSource>();
         ammoUI = GameObject.Find("AmmoText").GetComponent<TextMeshProUGUI>();
         if (audioSource == null)
         {
