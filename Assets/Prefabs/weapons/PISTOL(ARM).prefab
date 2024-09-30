@@ -66,17 +66,17 @@ MonoBehaviour:
   midpoint: 0.03
   idleBobbingSpeed: 5
   idleBobbingAmount: 1
+  bobLimitIdle: {x: 0.01, y: 0.01, z: 0.01}
+  multiplierIdle: {x: 0, y: 0, z: 0}
   travelLimit: {x: 5, y: 5, z: 5}
   bobLimit: {x: 10, y: 10, z: 10}
   travelLimitADS: {x: 1, y: 1, z: 1}
   bobLimitADS: {x: 5, y: 5, z: 5}
   travelLimitAir: {x: 5, y: 5, z: 1}
   bobLimitAir: {x: 5, y: 5, z: 5}
-  bobLimitIdle: {x: 0.01, y: 0.01, z: 0.01}
   multiplier: {x: 1.5, y: 2, z: 2}
   multiplierADS: {x: 1, y: 1, z: 1}
   multiplierAir: {x: 1, y: 1, z: 1}
-  multiplierIdle: {x: 0, y: 0, z: 0}
   sprintMultiplier: {x: 4, y: 6, z: 2}
 --- !u!1 &791600766141618903
 GameObject:
@@ -776,8 +776,8 @@ MonoBehaviour:
   rotationalReturnSpeed: 38
   RecoilRotation: {x: 20, y: 1, z: -5}
   RecoilKickBack: {x: 0.003, y: -0.001, z: -0.2}
-  RecoilRotationAim: {x: 10, y: 5, z: 2}
-  RecoilKickBackAim: {x: 0.001, y: 0, z: -0.5}
+  RecoilRotationAim: {x: 10, y: 3, z: 1}
+  RecoilKickBackAim: {x: 0.001, y: 0, z: -0.1}
   aiming: 0
 --- !u!1 &6276254441560087954
 GameObject:
@@ -1077,12 +1077,12 @@ MonoBehaviour:
   adsRotation: {x: 0, y: 0, z: 0}
   adsSpeed: 7
   crosshair: {fileID: 0}
-  camFovAds: 40
+  camFovAds: 45
   camFovDefault: 0
   isAds: 0
   isAiming: 0
   gunRecoilRotation: {x: 50, y: 4, z: 25}
-  gunRecoilRotationAiming: {x: 50, y: 4, z: 25}
+  gunRecoilRotationAiming: {x: 30, y: 3, z: 20}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
 --- !u!65 &4504342021514290780

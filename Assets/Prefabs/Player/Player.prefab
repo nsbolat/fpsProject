@@ -1435,7 +1435,7 @@ Transform:
   m_GameObject: {fileID: 2380454702252808049}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: -0.263}
+  m_LocalPosition: {x: 0, y: -1.5, z: -0.2630005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2428,6 +2428,7 @@ MonoBehaviour:
   playerProneStance:
     cameraHeight: -0.6
     StanceCollider: {fileID: 1880244352182807245}
+  aiming: 0
   isSprint: 0
   metalFS:
   - {fileID: 8300000, guid: 5e265270fb85126479eef52d8fce3b08, type: 3}
@@ -2535,6 +2536,7 @@ MonoBehaviour:
   baseStepSpeed: 0.5
   crouchStepMultiplier: 1.5
   sprintStepMultiplier: 0.6
+  stepSpeed: 0
   footStepsSource: {fileID: 9083502097922482514}
   footStepTime: 0
   footstepInterval: 0.5
@@ -2631,6 +2633,11 @@ MonoBehaviour:
   slot1: {fileID: 6570464699454611895}
   slot2: {fileID: 8659164130729357453}
   slot3: {fileID: 6849016060365110693}
+  weaponSwitchDelay: 0.5
+  weaponSwitchAudioSource: {fileID: 0}
+  pistolSwitchSound: {fileID: 0}
+  rifleSwitchSound: {fileID: 0}
+  shotgunSwitchSound: {fileID: 0}
 --- !u!114 &5935917634043570205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2645,11 +2652,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentPlayerHealth: 100
   maxPlayerHealth: 100
-  redImage: {fileID: 0}
-  hurtImage: {fileID: 0}
-  hurtTimer: 0.1
+  voroIntensityStat: 2.55
+  vignetteIntensityStat: 1.25
+  voroScalingFactor: 1
+  vignetteScalingFactor: 1
+  flashDuration: 0.2
+  flashFadeOutTime: 0.5
+  fullScreenDamage: {fileID: 0}
+  damageMaterial: {fileID: 0}
   hurtAudio: {fileID: 8300000, guid: 87f68829fe92fdf4fbdc235d14dada77, type: 3}
   regenTimer: 0
+  regenSpeed: 10
 --- !u!82 &9083502097922482514
 AudioSource:
   m_ObjectHideFlags: 0

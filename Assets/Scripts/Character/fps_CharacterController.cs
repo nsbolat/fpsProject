@@ -10,7 +10,7 @@ using static fps_Models;
 public class fps_CharacterController : MonoBehaviour
 {
     private CharacterController _characterController;
-    private DefaultInput defaultInput;
+    public DefaultInput defaultInput;
     public Vector2 input_Movement; //denetleyiciden gelen ham girdi
     public Vector2 input_View; //denetleyiciden gelen ham girdi
     public float currentViewXsens;
@@ -48,6 +48,7 @@ public class fps_CharacterController : MonoBehaviour
     public CharacterStance playerStandStance;
     public CharacterStance playerCrouchStance;
     public CharacterStance playerProneStance;
+    public bool aiming;
     private float stanceCheckErrorMargin = 0.05f;
     
     private float cameraHeight;
@@ -69,6 +70,7 @@ public class fps_CharacterController : MonoBehaviour
     public float baseStepSpeed=0.5f;
     public float crouchStepMultiplier = 1.5f;
     public float sprintStepMultiplier = 0.6f;
+    public float stepSpeed;
     public AudioSource footStepsSource;
     public float footStepTime = 0f;
     public float footstepInterval = 0.5f;
@@ -169,6 +171,11 @@ public class fps_CharacterController : MonoBehaviour
         else
         {
             playerSettings.speedEffector = 1;
+        }
+
+        if (aiming)
+        {
+            playerSettings.speedEffector *=0.5f;
         }
         verticalSpeed *= playerSettings.speedEffector;
         horizontalSpeed *= playerSettings.speedEffector;
@@ -328,7 +335,7 @@ public class fps_CharacterController : MonoBehaviour
         }
 
         footStepTime -= Time.deltaTime;
-        float stepSpeed = baseStepSpeed;
+        stepSpeed = baseStepSpeed;
 
         // Adjust step speed based on stance
         switch (_playerStance)
@@ -340,7 +347,17 @@ public class fps_CharacterController : MonoBehaviour
                 return;
             default:
                 break;
+            
         }
+        switch (aiming)
+        {
+            case true:
+                stepSpeed *= 1.5f;
+                break;
+            default:
+                break;
+        }
+
 
         // Adjust step speed based on movement (walking vs running)
         if (isSprint)

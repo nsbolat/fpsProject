@@ -16,6 +16,15 @@ public class AiAgent : MonoBehaviour
     public Animator animator;
     public AiSensor sensor;
     
+    [Header("SOUNDS")]
+        [Space(10)]
+        public AudioClip[] footstepSounds; // Array of footstep sounds
+        private AudioSource audioSource;
+        public AudioClip attackSound;
+
+        public AudioClip deathSound;
+    
+    
     public delegate void AttackHitEvent(AiAgent agent);
     public event AttackHitEvent OnAttackHit;
 
@@ -26,6 +35,11 @@ public class AiAgent : MonoBehaviour
         if (playerTransform == null)
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+
+        if (audioSource==null)
+        {
+            audioSource = GetComponent<AudioSource>();
         }
 
         ragdoll = GetComponent<Ragdoll>();
@@ -65,6 +79,24 @@ public class AiAgent : MonoBehaviour
         {
             OnAttackHit(this);
         }
+    }
+    
+    public void PlayFootstepSound()
+    {
+        if (footstepSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, footstepSounds.Length);
+            audioSource.pitch = 1f;
+            AudioClip footstepClip = footstepSounds[randomIndex];
+            audioSource.PlayOneShot(footstepClip);
+        }
+    }
+
+    public void playDeathSound()
+    {
+        audioSource.pitch = 1f;
+        audioSource.volume = 1f;
+        audioSource.PlayOneShot(deathSound);
     }
 }
 

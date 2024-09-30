@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class enemyHealth : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class enemyHealth : MonoBehaviour
     private Dictionary<SkinnedMeshRenderer, Material[]> originalMaterials = new Dictionary<SkinnedMeshRenderer, Material[]>(); // Original materials dictionary
     
     private bool isBlinking = false;
+    public bool isDead = false;
 
     private void Start()
     {
@@ -32,6 +34,11 @@ public class enemyHealth : MonoBehaviour
         {
             enemyHitbox eHitbox = rigidBody.gameObject.AddComponent<enemyHitbox>(); // Add enemyHitbox script to them
             eHitbox.enemyHealth = this;
+
+            if (rigidBody.gameObject.name.Equals("Head", StringComparison.OrdinalIgnoreCase)) // Eğer obje "head" ise
+            {
+                eHitbox.isHead = true; // isHead özelliğini true yap
+            }
         }
 
         _skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>(); // Get all child skinned mesh renderers
@@ -43,29 +50,36 @@ public class enemyHealth : MonoBehaviour
         _healthBar = GetComponentInChildren<enemyUIHealthBar>();
     }
 
-    public void takeDamage(float amount, Vector3 direction) // Take damage
+    public void takeDamage(float amount, Vector3 direction, GameObject hitObject,bool isHeadshot = false) // Take damage
     {
-        currentHealth -= amount; // Subtract the incoming damage from current health
-        _healthBar.setHealthBarPercentage(currentHealth / maxHealth);
-        
-        agent.stateMachine.ChangeState(AiStateId.Damage);
-
-        blinkTimer = blinkDuration;
-        isBlinking = true;
-        
-        ApplyDamageMaterial(); // Apply damage material
-
-        if (currentHealth <= 0.0f) // If health is 0, die
+        if (!isDead)
         {
-            Die(direction);
+            float finalDamage = isHeadshot ? amount * 2 : amount; // Eğer headshot ise hasarı 2 kat yap
+        
+            currentHealth -= finalDamage; // Subtract the incoming damage from current health
+            _healthBar.setHealthBarPercentage(currentHealth / maxHealth);
+        
+            agent.stateMachine.ChangeState(AiStateId.Damage);
+
+            blinkTimer = blinkDuration;
+            isBlinking = true;
+        
+            ApplyDamageMaterial(); // Apply damage material
+            if(currentHealth <= 0.0f)
+            {
+                Die(direction,hitObject);
+                
+            }
         }
     }
 
-    void Die(Vector3 direction)
+    void Die(Vector3 direction, GameObject hitObject)
     {
         AiDeathState deathState = agent.stateMachine.GetState(AiStateId.Death) as AiDeathState;
         deathState.direction = direction;
         agent.stateMachine.ChangeState(AiStateId.Death);
+        agent.ragdoll.ApplyForce(direction*agent.config.dieForce,hitObject.GetComponent<Rigidbody>());
+        isDead = true;
     }
 
     private void Update()

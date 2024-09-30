@@ -15,6 +15,6 @@ MonoBehaviour:
   maxTime: 0.01
   maxDistance: 1
   defaultSpeed: 5
-  dieForce: 5
+  dieForce: 100
   maxSightDistance: 5
   attackRange: 2

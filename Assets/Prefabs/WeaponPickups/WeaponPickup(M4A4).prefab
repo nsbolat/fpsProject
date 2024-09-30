@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4032046577787172433}
   - component: {fileID: 8303358096008520152}
   - component: {fileID: 7616326963498333596}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 172111738367546291}
   - component: {fileID: 4137762166131034029}
   - component: {fileID: 8360258109306634316}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Rear_Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useEvents: 0
   promptMessage: PICK UP "M4A4"
-  border: 1
+  isHoldable: 0
+  requiredHoldTime: 2
   weaponFab: {fileID: 7770787496878760606, guid: 63f584a9b1db3904795c0d99ea11c9fe,
     type: 3}
 --- !u!54 &7989265571146224288
@@ -329,7 +330,7 @@ GameObject:
   - component: {fileID: 7232375802213691929}
   - component: {fileID: 7012876491388320107}
   - component: {fileID: 5392515238839427184}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +414,7 @@ GameObject:
   - component: {fileID: 7560358586482723809}
   - component: {fileID: 4135780970759145212}
   - component: {fileID: 6369957259068085518}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: M4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +524,7 @@ GameObject:
   - component: {fileID: 719493732418226607}
   - component: {fileID: 6411463371819958677}
   - component: {fileID: 8640389079853928117}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -606,7 +607,7 @@ GameObject:
   - component: {fileID: 5310837371097342934}
   - component: {fileID: 3326740981545841552}
   - component: {fileID: 6246749426140388946}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}

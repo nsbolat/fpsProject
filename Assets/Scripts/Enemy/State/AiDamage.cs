@@ -32,6 +32,7 @@ public class AiDamage : AiState
         {
             agent.stateMachine.ChangeState(AiStateId.ChasePlayer);
             agent.navMeshAgent.speed = agent.config.defaultSpeed;
+            agent.animator.SetLayerWeight(1, Mathf.Lerp(1f, 0f, t));
         }
     }
 

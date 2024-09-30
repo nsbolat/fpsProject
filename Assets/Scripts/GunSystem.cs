@@ -199,7 +199,7 @@ public class GunSystem : MonoBehaviour
             isAds = true;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, adsPosition, Time.deltaTime * adsSpeed);
             weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, Quaternion.Euler(adsRotation), Time.deltaTime * adsSpeed); // Apply local rotation
-            
+            FPSCharacterController.aiming = true;
             crosshair.color = new Color(0, 0, 0, 0);
             camRecoil.aiming = true;
             weaponRecoil.aiming = true;
@@ -211,7 +211,7 @@ public class GunSystem : MonoBehaviour
             isAds = false;
             weaponModel.transform.localPosition = Vector3.Lerp(weaponModel.transform.localPosition, hipfirePosition, Time.deltaTime * adsSpeed);
             weaponModel.transform.localRotation = Quaternion.Lerp(weaponModel.transform.localRotation, hipfireRotation, Time.deltaTime * adsSpeed); // Reset local rotation
-
+            FPSCharacterController.aiming = false;
             crosshair.color = new Color(255, 255, 255, 255);
             camRecoil.aiming = false;
             weaponRecoil.aiming = false;
@@ -246,28 +246,20 @@ public class GunSystem : MonoBehaviour
         // Calculate Direction with Spread
 
         // RayCastif (Physics.Raycast(cam.transform.position, target, out rayHit, range))
-        if (Physics.Raycast(AttackPoint, target + new Vector3(x,y,z), out rayHit, range))
+        Vector3 bulletHitPoint = target + new Vector3(x, y, z);
+        if (Physics.Raycast(AttackPoint, bulletHitPoint, out rayHit, range))
         {
-            if (rayHit.collider.CompareTag("Enemy"))
-            {
-                // rayHit.collider.GetComponent<ShootingAi>().TakeDamage(damage);
-            }
-            
             var rb2d = rayHit.collider.GetComponent<Rigidbody>();
             if (rb2d)
             {
-                rb2d.AddForceAtPosition(target*20,rayHit.point,ForceMode.Impulse);
+                rb2d.AddForceAtPosition(bulletHitPoint*40,rayHit.point,ForceMode.Impulse);
             }
             var enemyHitBox = rayHit.collider.GetComponent<enemyHitbox>();
             if (enemyHitBox)
             {
-                enemyHitBox.onRaycastHit(this, target);
+                enemyHitBox.onRaycastHit(this, bulletHitPoint ,enemyHitBox.gameObject);
             }
-
-            if (rayHit.collider.CompareTag("Player"))
-            {
-                
-            }
+            
             createBulletHole();
         }
 

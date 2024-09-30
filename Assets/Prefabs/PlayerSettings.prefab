@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8690120698414917113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5800594811993356057}
+  - component: {fileID: 1364226898623495979}
+  m_Layer: 0
+  m_Name: PlayerSettings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5800594811993356057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690120698414917113}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.522743, y: 132.39621, z: -20.0607}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364226898623495979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690120698414917113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac78347fbf6e98446889a916882d822c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSettings:
+    ViewXsens: 20
+    ViewYsens: 20
+    CameraFov: 75
+    ViewXinverted: 0
+    ViewYinverted: 0
+    walkFowardSpeed: 4
+    walkingStrafeSpeed: 4
+    runFowardSpeed: 6
+    runStrafeSpeed: 6
+    movementSmoothing: 0.01
+    sprintHold: 1
+    jumpingHeight: 1
+    jumpingFalloff: 0.4
+    jumpingFallSmooth: 0.4
+    speedEffector: 1
+    crouchSpeedEffector: 0.6
+    proneSpeedEffector: 0.2
+    fallingSpeedEffector: 1

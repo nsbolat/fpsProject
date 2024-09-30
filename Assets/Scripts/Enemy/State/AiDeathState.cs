@@ -10,17 +10,18 @@ public class AiDeathState : AiState
     {
         return AiStateId.Death;
     }
+    
 
     public void Enter(AiAgent agent)
     {
         agent.ragdoll.ActiveRagdoll();
-        direction.y = 1;
-        agent.ragdoll.ApplyForce(direction*agent.config.dieForce);
         agent.ui.gameObject.SetActive(false);
         agent.mesh.updateWhenOffscreen = true;
         agent.navMeshAgent.stoppingDistance = 0f;
         agent.navMeshAgent.destination = agent.transform.position;
         agent.navMeshAgent.speed = 0f;
+        agent.playDeathSound();
+        Debug.Log("is dead");
 
 
     }

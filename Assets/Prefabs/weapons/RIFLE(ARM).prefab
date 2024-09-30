@@ -643,8 +643,8 @@ MonoBehaviour:
   camFovDefault: 0
   isAds: 0
   isAiming: 0
-  gunRecoilRotation: {x: 100, y: 10, z: 60}
-  gunRecoilRotationAiming: {x: 40, y: 60, z: 60}
+  gunRecoilRotation: {x: 30, y: 4, z: 25}
+  gunRecoilRotationAiming: {x: 20, y: 2, z: 15}
   gunRotationSpeed: 6
   gunReturnSpeed: 35
 --- !u!95 &5202885230017163128
@@ -1178,8 +1178,8 @@ RectTransform:
   m_GameObject: {fileID: 7355809158865213335}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0.89999956}
-  m_LocalScale: {x: 0.107933134, y: 0.1569936, z: 0.0065414016}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.05, y: 0.07272725, z: 0.0030303027}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 246120190089408791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

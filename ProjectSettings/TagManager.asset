@@ -28,8 +28,8 @@ TagManager:
   - Enemy
   - Ground
   - SpawnArea
-  - 
-  - 
+  - PostMainCamera
+  - MotionBlurMask
   - 
   - 
   - 
@@ -49,6 +49,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 1253874021
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

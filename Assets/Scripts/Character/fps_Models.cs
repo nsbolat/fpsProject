@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public static class fps_Models
 {
@@ -14,7 +15,7 @@ public static class fps_Models
     [Serializable] 
     public class PlayerSettingsModel
     {
-        [Header("View Sens Settings")]
+        [Header("View Sens Settings")] 
         public float ViewXsens;
         public float ViewYsens;
         public float CameraFov;
@@ -47,9 +48,9 @@ public static class fps_Models
         public float proneSpeedEffector;
         public float fallingSpeedEffector;
 
-
-
     }
+    
+    public static PlayerSettingsModel playerSettings = new PlayerSettingsModel();
     [Serializable]
     public class CharacterStance
     {
