@@ -77,8 +77,8 @@ public class fps_CharacterController : MonoBehaviour
     [Range(0.0f,1.0f)]
     public float fs_VolumeMin, fs_VolumeMax;
 
-    //[Header("Anim")] 
-   // public Animator fpsAnim;
+    [Header("Anim")] 
+    public Animator _CameraShakeAnimator;
    public Camera cam;
 
 
@@ -96,6 +96,7 @@ public class fps_CharacterController : MonoBehaviour
 
         cameraHolder = GameObject.Find("CameraHolder").transform;
         feetTransform = GameObject.Find("feetTransform").transform;
+        _CameraShakeAnimator = GameObject.Find("CameraAnims").GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         
         defaultInput.Enable();//denetleyici etkinleştirme
@@ -113,10 +114,18 @@ public class fps_CharacterController : MonoBehaviour
 
     private void Update()
     {
+        if (DialogueManager.isActive)
+        {
+            _CameraShakeAnimator.SetBool("isSprint",false);
+            _CameraShakeAnimator.SetBool("isWalk",false);
+            return;
+        }
+        
         calculateView();
         calculateMovement();
         calculateJump();
         calculateStance();
+        calculateCameraMovementShakes();
         isGrounded = Physics.CheckSphere(feetTransform.position, groundDistance,playerMask);
         if (isGrounded && velocity.y<0)
         {
@@ -194,21 +203,6 @@ public class fps_CharacterController : MonoBehaviour
         _characterController.Move(movementSpeed);
         PlayFootStep();
     }
-
-    /* private void handleAnimation() //test yürüme anim
-    {
-        if (newMovementSpeed == Vector3.zero)
-        {
-            fpsAnim.SetFloat("Speed",0f,0.2f,Time.deltaTime);
-        }else if (newMovementSpeed != Vector3.zero && !isSprint)
-        {
-          fpsAnim.SetFloat("Speed",0.5f,0.2f,Time.deltaTime);
-        }else if (newMovementSpeed != Vector3.zero && isSprint)
-        {
-            fpsAnim.SetFloat("Speed",1f,0.2f,Time.deltaTime);
-
-        }
-    }*/
     
     private void calculateJump()
     {
@@ -395,6 +389,28 @@ public class fps_CharacterController : MonoBehaviour
         }
     }
 
+    void calculateCameraMovementShakes()
+    {
+        if (isSprint && input_Movement.magnitude!=0 &&isGrounded)
+        {
+            _CameraShakeAnimator.SetBool("isSprint",true);
+        }
+        else
+        {
+            _CameraShakeAnimator.SetBool("isSprint",false);
+        }
 
-    
+        if (input_Movement.magnitude!=0 && !isSprint && isGrounded && _playerStance==PlayerStance.Stand && !aiming)
+        {
+            _CameraShakeAnimator.SetBool("isWalk",true);
+        }
+        else
+        {
+            _CameraShakeAnimator.SetBool("isWalk",false);
+
+        }
+    }
+
+
+
 }

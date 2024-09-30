@@ -16,23 +16,6 @@ public class CameraShakes : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_fpsCharacterController.isSprint && _fpsCharacterController.input_Movement.magnitude!=0 && _fpsCharacterController.isGrounded)
-        {
-            _Animator.SetBool("isSprint",true);
-        }
-        else
-        {
-            _Animator.SetBool("isSprint",false);
-        }
 
-        if (_fpsCharacterController.input_Movement.magnitude!=0 && !_fpsCharacterController.isSprint && _fpsCharacterController.isGrounded)
-        {
-            _Animator.SetBool("isWalk",true);
-        }
-        else
-        {
-            _Animator.SetBool("isWalk",false);
-
-        }
     }
 }
